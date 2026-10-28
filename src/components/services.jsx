@@ -100,7 +100,7 @@ function CPApproach() {
   const { WavyDivider = Noop, Sparkle = Noop } = window.CultivatePlayDesignSystem_d72bbd;
   const steps = [
     { n: "01", t: "Free phone consult", d: "A no-pressure call to talk about your child and see whether we're the right fit." },
-    { n: "02", t: "Play-based evaluation", d: "A relaxed, child-led session to understand your child's strengths and where support helps." },
+    { n: "02", t: "Play-based evaluation", d: "A relaxed, child-led session to understand your child's strengths and where support helps. It may include standardized assessments and parent questionnaires." },
     { n: "03", t: "A plan built on strengths", d: "We set goals together, around your family's routines, priorities, and your child's interests." },
     { n: "04", t: "Grow together", d: "Ongoing sessions at home, in the community, in office, or via telehealth, with progress you can see." },
   ];

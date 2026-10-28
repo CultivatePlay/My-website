@@ -73,9 +73,7 @@ function CPFloortimePage() {
             <Button variant="primary" size="lg" as="a" href={CALENDLY_FT} target="_blank" rel="noopener">Book a free consultation</Button>
             <Button variant="outline" size="lg" as="a" href="tel:16157689170">Call (615) 768-9170</Button>
           </div>
-          <p style={{ fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--ink-500)", marginTop: "var(--space-6)" }}>
-            Led by Alyssa Engel, OTD, OTR/L, DIR-Proficient
-          </p>
+          
         </div>
       </section>
 
