@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cultivate-play.com/sitemap.xml

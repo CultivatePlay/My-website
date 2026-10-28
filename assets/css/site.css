@@ -1,0 +1,1274 @@
+/* Cultivate Play Design System — global entry point.
+   Consumers link THIS file. Keep it as @import lines only. */
+/* Webfonts — Cultivate Play brand fonts (both native Google Fonts).
+   Display/headings: Merriweather (serif). Body/UI: Poppins (geometric sans).
+   Mono: JetBrains Mono (specimens/code).
+   Note: Merriweather ships 300/400/700/900 only — headings use 700/900. */
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/font-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/font-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/font-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/font-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/font-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/font-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-07.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-08.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-09.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-10.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-11.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-07.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-08.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-09.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-10.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-11.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-12.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-13.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-14.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-15.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-16.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-12.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-13.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-14.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-15.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-16.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 900;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-12.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 900;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-13.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 900;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-14.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 900;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-15.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 900;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("../fonts/font-16.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-17.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-18.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-19.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-20.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-21.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-22.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-23.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-24.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/font-25.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-26.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-27.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/font-28.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/font-29.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/font-30.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/font-31.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/font-32.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/font-33.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/font-34.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../fonts/font-35.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../fonts/font-36.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../fonts/font-37.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+/* ============================================================
+   COLORS — Cultivate Play  (brand palette)
+   Sage + deep green, soft lavenders, warm greige neutrals.
+   Source brand swatches: #0b7a46 #74b695 #88bea5
+   #c0bfe1 #d3d1ef #e3dddc #ffffff
+   ============================================================ */
+:root {
+  /* ---- Brand green (deep + sage) ---- */
+  --green-50:  #EFF6F1;
+  --green-100: #D8EBE0;
+  --green-200: #B6D8C4;
+  --green-300: #88BEA5; /* brand sage */
+  --green-400: #74B695; /* brand sage */
+  --green-500: #2F9762; /* action green */
+  --green-600: #0B7A46; /* brand primary (logo) */
+  --green-700: #0A6539;
+  --green-800: #074C2A;
+  --green-900: #05331D;
+
+  /* ---- Lavender / soft purple accent ---- */
+  --lavender-50:  #F4F3FB;
+  --lavender-100: #E8E7F5;
+  --lavender-200: #D3D1EF; /* brand lavender */
+  --lavender-300: #C0BFE1; /* brand lavender */
+  --lavender-400: #A6A4D6;
+  --lavender-500: #8B88C6; /* accent (added, deeper) */
+  --lavender-600: #706CB0;
+  --lavender-700: #565299;
+
+  /* ---- Mint / soft sage surfaces ---- */
+  --mint-50: #F2F8F4;
+  --mint-100: #E2F0E8;
+  --mint-200: #C9E2D3;
+
+  /* ---- Warm greige / paper ---- */
+  --cream:    #F7F4F2;
+  --sand-100: #EFE9E7;
+  --sand-200: #E3DDDC; /* brand greige */
+
+  /* ---- Warm taupe-gray neutrals ---- */
+  --ink-900: #211C1A;
+  --ink-800: #2E2826;
+  --ink-700: #463F3D;
+  --ink-600: #635A57;
+  --ink-500: #847A77;
+  --ink-400: #A89F9C;
+  --ink-300: #CFC7C5;
+  --ink-200: #E3DDDC;
+  --ink-100: #EFEAE8;
+  --ink-50:  #F7F4F2;
+  --white:   #FFFFFF;
+  --black:   #14100F;
+
+  /* ---- Semantic raw ---- */
+  --success: #0B7A46;
+  --success-soft: #D8EBE0;
+  --warning: #DD9F38;
+  --warning-soft: #F8EBCF;
+  --danger:  #C9614E;
+  --danger-soft: #F4DED8;
+  --info:    #8B88C6;
+  --info-soft: #E8E7F5;
+
+  /* ============================================================
+     SEMANTIC ALIASES — prefer these in components
+     ============================================================ */
+  /* Text */
+  --text-strong:   var(--ink-900);
+  --text-body:     var(--ink-800);
+  --text-muted:    var(--ink-600);
+  --text-subtle:   var(--ink-500);
+  --text-on-brand: var(--white);
+  --text-on-accent:var(--white);
+  --text-link:     var(--green-600);
+  --text-link-hover: var(--green-700);
+
+  /* Surfaces */
+  --surface-page:        var(--cream);
+  --surface-card:        var(--white);
+  --surface-sunken:      var(--green-50);
+  --surface-brand:       var(--green-600);
+  --surface-brand-hover: var(--green-700);
+  --surface-brand-soft:  var(--green-100);
+  --surface-accent:      var(--lavender-500);
+  --surface-accent-soft: var(--lavender-100);
+  --surface-muted:       var(--ink-100);
+
+  /* Borders */
+  --border-subtle: var(--ink-200);
+  --border-default: var(--ink-300);
+  --border-strong: var(--ink-400);
+  --border-brand:  var(--green-600);
+  --border-accent: var(--lavender-400);
+
+  /* Focus */
+  --focus-ring: var(--lavender-400);
+}
+
+/* ============================================================
+   TYPOGRAPHY — Cultivate Play
+   Display: Lora (serif, echoes the logo wordmark)
+   Body/UI: Nunito (rounded, friendly, pediatric warmth)
+   Mono:    JetBrains Mono (specimens, code)
+   ============================================================ */
+:root {
+  --font-display: "Merriweather", Georgia, "Times New Roman", serif;
+  --font-body:    "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Sizes (16px base) */
+  --text-xs:   0.75rem;   /* 12 */
+  --text-sm:   0.875rem;  /* 14 */
+  --text-base: 1rem;      /* 16 */
+  --text-md:   1.125rem;  /* 18 */
+  --text-lg:   1.25rem;   /* 20 */
+  --text-xl:   1.5rem;    /* 24 */
+  --text-2xl:  1.875rem;  /* 30 */
+  --text-3xl:  2.25rem;   /* 36 */
+  --text-4xl:  3rem;      /* 48 */
+  --text-5xl:  3.75rem;   /* 60 */
+  --text-6xl:  4.5rem;    /* 72 */
+
+  /* Weights */
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-extrabold:800;
+
+  /* Line heights */
+  --leading-none:    1;
+  --leading-tight:   1.12;
+  --leading-snug:    1.28;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.7;
+
+  /* Letter spacing */
+  --tracking-tighter: -0.03em;
+  --tracking-tight:   -0.015em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-wider:   0.12em; /* uppercase eyebrows */
+
+  /* Semantic roles */
+  --font-heading: var(--font-display);
+  --font-eyebrow: var(--font-body);
+}
+
+/* ============================================================
+   SPACING & LAYOUT — Cultivate Play  (4px base grid)
+   ============================================================ */
+:root {
+  --space-0:  0;
+  --space-1:  0.25rem; /* 4 */
+  --space-2:  0.5rem;  /* 8 */
+  --space-3:  0.75rem; /* 12 */
+  --space-4:  1rem;    /* 16 */
+  --space-5:  1.25rem; /* 20 */
+  --space-6:  1.5rem;  /* 24 */
+  --space-7:  1.75rem; /* 28 */
+  --space-8:  2rem;    /* 32 */
+  --space-10: 2.5rem;  /* 40 */
+  --space-12: 3rem;    /* 48 */
+  --space-14: 3.5rem;  /* 56 */
+  --space-16: 4rem;    /* 64 */
+  --space-20: 5rem;    /* 80 */
+  --space-24: 6rem;    /* 96 */
+  --space-32: 8rem;    /* 128 */
+
+  /* Container widths */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+  --container-2xl: 1320px;
+
+  /* Section rhythm */
+  --section-y: var(--space-24);
+  --gutter:    var(--space-6);
+}
+
+/* ============================================================
+   EFFECTS — radius, shadow, motion  (Cultivate Play)
+   Generous rounding + soft green-tinted shadows = warm, friendly.
+   ============================================================ */
+:root {
+  /* Corner radii — friendly, generous */
+  --radius-xs:  6px;
+  --radius-sm:  10px;
+  --radius-md:  14px;
+  --radius-lg:  20px;
+  --radius-xl:  28px;
+  --radius-2xl: 36px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* Shadows — warm taupe tint (matches greige neutrals), never pure black */
+  --shadow-xs: 0 1px 2px rgba(46, 40, 38, 0.06);
+  --shadow-sm: 0 2px 8px rgba(46, 40, 38, 0.08);
+  --shadow-md: 0 8px 24px rgba(46, 40, 38, 0.10);
+  --shadow-lg: 0 16px 40px rgba(46, 40, 38, 0.12);
+  --shadow-xl: 0 28px 64px rgba(46, 40, 38, 0.16);
+
+  /* Soft lavender focus ring */
+  --shadow-focus: 0 0 0 4px rgba(166, 164, 214, 0.50);
+  --ring-width: 3px;
+
+  /* Borders */
+  --border-width: 1.5px;
+  --border-width-strong: 2px;
+
+  /* Motion — gentle, no harsh bounces */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-gentle: cubic-bezier(0.45, 0, 0.15, 1); /* @kind other */
+  --duration-fast: 120ms; /* @kind other */
+  --duration-normal: 200ms; /* @kind other */
+  --duration-slow: 320ms; /* @kind other */
+}
+
+/* ============================================================
+   BASE — light resets + element defaults (Cultivate Play)
+   Imported last. Sets the page on warm paper with friendly type.
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-body);
+  background: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+  font-weight: 700; /* Merriweather: 700/900 only */
+}
+
+p { margin: 0; text-wrap: pretty; }
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+a:hover { color: var(--text-link-hover); }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-xs);
+}
+
+/* Eyebrow / kicker helper */
+.cp-eyebrow {
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--green-600);
+}
+
+::selection { background: var(--lavender-200); color: var(--ink-900); }
+
+/* ============================================================
+   Cultivate Play — component styles
+   Class-based so hover/focus/active states are real CSS.
+   Shipped via styles.css. All values reference design tokens.
+   ============================================================ */
+
+/* ---------------- Button ---------------- */
+.cp-btn {
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-base);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-5);
+  height: 44px;
+  border-radius: var(--radius-pill);
+  border: var(--border-width) solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard);
+}
+.cp-btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+.cp-btn:active { transform: translateY(1px); }
+.cp-btn[disabled], .cp-btn.is-disabled {
+  opacity: 0.5; cursor: not-allowed; transform: none;
+}
+.cp-btn__spinner {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid currentColor; border-top-color: transparent;
+  animation: cp-spin 0.7s linear infinite;
+}
+@keyframes cp-spin { to { transform: rotate(360deg); } }
+
+.cp-btn--primary { background: var(--green-600); color: #fff; }
+.cp-btn--primary:hover { background: var(--green-700); }
+.cp-btn--secondary { background: var(--lavender-500); color: #fff; }
+.cp-btn--secondary:hover { background: var(--lavender-600); }
+.cp-btn--soft { background: var(--green-100); color: var(--green-800); }
+.cp-btn--soft:hover { background: var(--green-200); }
+.cp-btn--outline { background: transparent; color: var(--green-700); border-color: var(--green-600); }
+.cp-btn--outline:hover { background: var(--green-50); }
+.cp-btn--ghost { background: transparent; color: var(--ink-800); }
+.cp-btn--ghost:hover { background: var(--ink-100); }
+.cp-btn--danger { background: var(--danger); color: #fff; }
+.cp-btn--danger:hover { background: #c14a41; }
+
+.cp-btn--sm { height: 36px; font-size: var(--text-sm); padding: 0 var(--space-4); }
+.cp-btn--lg { height: 54px; font-size: var(--text-md); padding: 0 var(--space-7); }
+.cp-btn--block { display: flex; width: 100%; }
+.cp-btn--square { border-radius: var(--radius-md); }
+.cp-btn__icon { display: inline-flex; width: 1.15em; height: 1.15em; }
+.cp-btn__icon svg { width: 100%; height: 100%; }
+
+/* ---------------- Icon Button ---------------- */
+.cp-icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: var(--radius-pill);
+  border: var(--border-width) solid transparent; cursor: pointer;
+  color: var(--ink-700); background: transparent;
+  transition: background var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
+}
+.cp-icon-btn:hover { background: var(--ink-100); color: var(--ink-900); }
+.cp-icon-btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+.cp-icon-btn--solid { background: var(--green-600); color: #fff; }
+.cp-icon-btn--solid:hover { background: var(--green-700); color: #fff; }
+.cp-icon-btn--soft { background: var(--green-100); color: var(--green-800); }
+.cp-icon-btn--soft:hover { background: var(--green-200); }
+.cp-icon-btn--sm { width: 36px; height: 36px; }
+.cp-icon-btn--lg { width: 52px; height: 52px; }
+.cp-icon-btn svg { width: 20px; height: 20px; }
+.cp-icon-btn[disabled] { opacity: .5; cursor: not-allowed; }
+
+/* ---------------- Fields ---------------- */
+.cp-field { display: flex; flex-direction: column; gap: var(--space-2); }
+.cp-label {
+  font-family: var(--font-body); font-weight: var(--weight-bold);
+  font-size: var(--text-sm); color: var(--ink-800);
+}
+.cp-label__req { color: var(--danger); margin-left: 2px; }
+.cp-input, .cp-textarea, .cp-select {
+  font-family: var(--font-body); font-size: var(--text-base);
+  color: var(--ink-900); background: var(--white);
+  border: var(--border-width) solid var(--ink-300);
+  border-radius: var(--radius-md); padding: 0 var(--space-4);
+  height: 46px; width: 100%;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard);
+}
+.cp-textarea { height: auto; min-height: 110px; padding: var(--space-3) var(--space-4); resize: vertical; line-height: var(--leading-normal); }
+.cp-input::placeholder, .cp-textarea::placeholder { color: var(--ink-400); }
+.cp-input:hover, .cp-textarea:hover, .cp-select:hover { border-color: var(--ink-400); }
+.cp-input:focus, .cp-textarea:focus, .cp-select:focus {
+  outline: none; border-color: var(--green-500);
+  box-shadow: 0 0 0 4px var(--green-100);
+}
+.cp-field--error .cp-input,
+.cp-field--error .cp-textarea,
+.cp-field--error .cp-select { border-color: var(--danger); }
+.cp-field--error .cp-input:focus { box-shadow: 0 0 0 4px var(--danger-soft); }
+.cp-input[disabled], .cp-textarea[disabled], .cp-select[disabled] {
+  background: var(--ink-50); color: var(--ink-400); cursor: not-allowed;
+}
+.cp-hint { font-size: var(--text-sm); color: var(--ink-500); }
+.cp-field--error .cp-hint { color: var(--danger); }
+.cp-input-wrap { position: relative; display: flex; align-items: center; }
+.cp-input-wrap .cp-input { padding-left: var(--space-10); }
+.cp-input-wrap__icon {
+  position: absolute; left: var(--space-4); display: inline-flex;
+  color: var(--ink-400); pointer-events: none;
+}
+.cp-input-wrap__icon svg { width: 18px; height: 18px; }
+
+/* Select arrow */
+.cp-select-wrap { position: relative; }
+.cp-select {
+  appearance: none; padding-right: var(--space-10); cursor: pointer;
+}
+.cp-select-wrap::after {
+  content: ""; position: absolute; right: var(--space-4); top: 50%;
+  width: 9px; height: 9px; border-right: 2px solid var(--ink-500);
+  border-bottom: 2px solid var(--ink-500);
+  transform: translateY(-65%) rotate(45deg); pointer-events: none;
+}
+
+/* ---------------- Checkbox / Radio ---------------- */
+.cp-check, .cp-radio {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  cursor: pointer; font-size: var(--text-base); color: var(--ink-800);
+  user-select: none;
+}
+.cp-check input, .cp-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+.cp-check__box, .cp-radio__box {
+  width: 22px; height: 22px; flex: none; background: var(--white);
+  border: var(--border-width-strong) solid var(--ink-300);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+.cp-check__box { border-radius: 7px; }
+.cp-radio__box { border-radius: 50%; }
+.cp-check__box svg { width: 14px; height: 14px; color: #fff; opacity: 0; transform: scale(.5); transition: all var(--duration-fast) var(--ease-out); }
+.cp-radio__box::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #fff; transform: scale(0); transition: transform var(--duration-fast) var(--ease-out); }
+.cp-check input:checked + .cp-check__box { background: var(--green-600); border-color: var(--green-600); }
+.cp-check input:checked + .cp-check__box svg { opacity: 1; transform: scale(1); }
+.cp-radio input:checked + .cp-radio__box { background: var(--green-600); border-color: var(--green-600); }
+.cp-radio input:checked + .cp-radio__box::after { transform: scale(1); }
+.cp-check input:focus-visible + .cp-check__box,
+.cp-radio input:focus-visible + .cp-radio__box { box-shadow: var(--shadow-focus); }
+.cp-check:hover .cp-check__box, .cp-radio:hover .cp-radio__box { border-color: var(--green-400); }
+.cp-check.is-disabled, .cp-radio.is-disabled { opacity: .5; cursor: not-allowed; }
+
+/* ---------------- Switch ---------------- */
+.cp-switch { display: inline-flex; align-items: center; gap: var(--space-3); cursor: pointer; font-size: var(--text-base); color: var(--ink-800); user-select: none; }
+.cp-switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+.cp-switch__track {
+  width: 46px; height: 26px; border-radius: var(--radius-pill);
+  background: var(--ink-300); position: relative; flex: none;
+  transition: background var(--duration-normal) var(--ease-standard);
+}
+.cp-switch__track::after {
+  content: ""; position: absolute; top: 3px; left: 3px;
+  width: 20px; height: 20px; border-radius: 50%; background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+.cp-switch input:checked + .cp-switch__track { background: var(--green-600); }
+.cp-switch input:checked + .cp-switch__track::after { transform: translateX(20px); }
+.cp-switch input:focus-visible + .cp-switch__track { box-shadow: var(--shadow-focus); }
+.cp-switch.is-disabled { opacity: .5; cursor: not-allowed; }
+
+/* ---------------- Card ---------------- */
+.cp-card {
+  background: var(--surface-card); border-radius: var(--radius-xl);
+  border: 1px solid var(--ink-100); box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.cp-card--flat { box-shadow: none; }
+.cp-card--soft { background: var(--green-50); border-color: var(--green-100); }
+.cp-card--lavender { background: var(--lavender-50); border-color: var(--lavender-100); }
+.cp-card--brand { background: var(--green-600); border-color: var(--green-700); color: #fff; }
+.cp-card--interactive { cursor: pointer; transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out); }
+.cp-card--interactive:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.cp-card__media { width: 100%; display: block; }
+.cp-card__body { padding: var(--space-6); }
+.cp-card__title { font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl); color: inherit; margin: 0 0 var(--space-2); }
+.cp-card__text { color: var(--ink-600); font-size: var(--text-base); margin: 0; }
+.cp-card--brand .cp-card__text { color: rgba(255,255,255,.85); }
+.cp-card__footer { padding: var(--space-4) var(--space-6); border-top: 1px solid var(--ink-100); display: flex; gap: var(--space-3); align-items: center; }
+
+/* ---------------- Badge ---------------- */
+.cp-badge {
+  display: inline-flex; align-items: center; gap: var(--space-1);
+  font-family: var(--font-body); font-weight: var(--weight-bold);
+  font-size: var(--text-xs); line-height: 1; letter-spacing: .01em;
+  padding: 5px 10px; border-radius: var(--radius-pill);
+  background: var(--ink-100); color: var(--ink-700);
+}
+.cp-badge--green { background: var(--green-100); color: var(--green-800); }
+.cp-badge--lavender { background: var(--lavender-100); color: var(--lavender-700); }
+.cp-badge--success { background: var(--success-soft); color: var(--green-800); }
+.cp-badge--warning { background: var(--warning-soft); color: #7a5410; }
+.cp-badge--danger { background: var(--danger-soft); color: #8a2f27; }
+.cp-badge--solid { background: var(--green-600); color: #fff; }
+.cp-badge__dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+/* ---------------- Tag ---------------- */
+.cp-tag {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-weight: var(--weight-semibold); font-size: var(--text-sm);
+  padding: 6px 12px; border-radius: var(--radius-pill);
+  background: var(--white); border: 1.5px solid var(--ink-200); color: var(--ink-700);
+}
+.cp-tag--active { background: var(--green-600); border-color: var(--green-600); color: #fff; }
+.cp-tag__x { display: inline-flex; cursor: pointer; opacity: .6; }
+.cp-tag__x:hover { opacity: 1; }
+.cp-tag__x svg { width: 14px; height: 14px; }
+
+/* ---------------- Avatar ---------------- */
+.cp-avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 50%; overflow: hidden;
+  background: var(--lavender-200); color: var(--lavender-700);
+  font-weight: var(--weight-bold); font-size: var(--text-base);
+  flex: none; border: 2px solid var(--white);
+}
+.cp-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.cp-avatar--sm { width: 32px; height: 32px; font-size: var(--text-sm); }
+.cp-avatar--lg { width: 60px; height: 60px; font-size: var(--text-lg); }
+.cp-avatar--green { background: var(--green-200); color: var(--green-800); }
+.cp-avatar-group { display: inline-flex; }
+.cp-avatar-group .cp-avatar { margin-left: -12px; }
+.cp-avatar-group .cp-avatar:first-child { margin-left: 0; }
+
+/* ---------------- Tabs ---------------- */
+.cp-tabs { display: inline-flex; gap: var(--space-1); background: var(--ink-100); padding: 5px; border-radius: var(--radius-pill); }
+.cp-tab {
+  font-family: var(--font-body); font-weight: var(--weight-bold);
+  font-size: var(--text-sm); color: var(--ink-600); cursor: pointer;
+  padding: 8px 18px; border-radius: var(--radius-pill); border: none;
+  background: transparent; transition: all var(--duration-fast) var(--ease-standard);
+}
+.cp-tab:hover { color: var(--ink-900); }
+.cp-tab--active { background: var(--white); color: var(--green-700); box-shadow: var(--shadow-xs); }
+
+/* ---------------- Accordion ---------------- */
+.cp-accordion { border: 1px solid var(--ink-200); border-radius: var(--radius-lg); overflow: hidden; background: var(--white); }
+.cp-accordion__item + .cp-accordion__item { border-top: 1px solid var(--ink-100); }
+.cp-accordion__head {
+  width: 100%; text-align: left; background: transparent; border: none; cursor: pointer;
+  padding: var(--space-4) var(--space-5); display: flex; align-items: center;
+  justify-content: space-between; gap: var(--space-4);
+  font-family: var(--font-body); font-weight: var(--weight-bold);
+  font-size: var(--text-md); color: var(--ink-900);
+}
+.cp-accordion__head:hover { background: var(--green-50); }
+.cp-accordion__chev { transition: transform var(--duration-normal) var(--ease-out); color: var(--green-600); flex: none; }
+.cp-accordion__item.is-open .cp-accordion__chev { transform: rotate(180deg); }
+.cp-accordion__panel { padding: 0 var(--space-5) var(--space-5); color: var(--ink-600); font-size: var(--text-base); line-height: var(--leading-relaxed); }
+
+/* ---------------- Alert ---------------- */
+.cp-alert {
+  display: flex; gap: var(--space-3); padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg); border: 1px solid;
+  font-size: var(--text-base);
+}
+.cp-alert__icon { flex: none; margin-top: 1px; }
+.cp-alert__icon svg { width: 20px; height: 20px; }
+.cp-alert__title { font-weight: var(--weight-bold); color: var(--ink-900); margin: 0 0 2px; }
+.cp-alert__body { color: var(--ink-700); }
+.cp-alert--info { background: var(--lavender-50); border-color: var(--lavender-200); }
+.cp-alert--info .cp-alert__icon { color: var(--lavender-600); }
+.cp-alert--success { background: var(--mint-50); border-color: var(--green-200); }
+.cp-alert--success .cp-alert__icon { color: var(--green-600); }
+.cp-alert--warning { background: var(--warning-soft); border-color: #efce8e; }
+.cp-alert--warning .cp-alert__icon { color: var(--warning); }
+.cp-alert--danger { background: var(--danger-soft); border-color: #eeb6b0; }
+.cp-alert--danger .cp-alert__icon { color: var(--danger); }
+
+/* ---------------- Toast ---------------- */
+.cp-toast {
+  display: flex; align-items: center; gap: var(--space-3);
+  background: var(--ink-900); color: #fff; padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  font-size: var(--text-base); font-weight: var(--weight-semibold);
+  max-width: 380px;
+}
+.cp-toast__icon { display: inline-flex; flex: none; }
+.cp-toast__icon svg { width: 20px; height: 20px; }
+.cp-toast--success .cp-toast__icon { color: var(--green-300); }
+.cp-toast--danger .cp-toast__icon { color: #f5a39b; }
+.cp-toast__close { margin-left: auto; opacity: .6; cursor: pointer; display: inline-flex; }
+.cp-toast__close:hover { opacity: 1; }
+
+/* ---------------- Tooltip ---------------- */
+.cp-tooltip { position: relative; display: inline-flex; }
+.cp-tooltip__bubble {
+  position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+  background: var(--ink-900); color: #fff; font-size: var(--text-sm); font-weight: 600;
+  padding: 6px 11px; border-radius: var(--radius-sm); white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity var(--duration-fast) var(--ease-standard);
+  box-shadow: var(--shadow-md); z-index: 10;
+}
+.cp-tooltip__bubble::after {
+  content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  border: 5px solid transparent; border-top-color: var(--ink-900);
+}
+.cp-tooltip:hover .cp-tooltip__bubble { opacity: 1; }
+
+/* ---------------- Dialog ---------------- */
+.cp-dialog-overlay {
+  position: fixed; inset: 0; background: rgba(22, 32, 27, .45);
+  backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center;
+  padding: var(--space-6); z-index: 100;
+}
+.cp-dialog {
+  background: var(--white); border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl); max-width: 460px; width: 100%;
+  overflow: hidden;
+}
+.cp-dialog__body { padding: var(--space-7); }
+.cp-dialog__title { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; color: var(--ink-900); margin: 0 0 var(--space-2); }
+.cp-dialog__text { color: var(--ink-600); margin: 0; line-height: var(--leading-relaxed); }
+.cp-dialog__footer { display: flex; gap: var(--space-3); justify-content: flex-end; padding: var(--space-4) var(--space-7) var(--space-6); }
+
+/* ---------------- Progress ---------------- */
+.cp-progress { height: 12px; background: var(--ink-100); border-radius: var(--radius-pill); overflow: hidden; width: 100%; }
+.cp-progress__bar { height: 100%; background: var(--green-500); border-radius: var(--radius-pill); transition: width var(--duration-slow) var(--ease-out); }
+.cp-progress--lavender .cp-progress__bar { background: var(--lavender-500); }
+
+/* ---------------- Stat ---------------- */
+.cp-stat { display: flex; flex-direction: column; gap: var(--space-1); }
+.cp-stat__value { font-family: var(--font-display); font-weight: 700; font-size: var(--text-4xl); color: var(--green-600); line-height: 1; }
+.cp-stat__label { font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--ink-600); }
+
+
+
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden}
+img{max-width:100%}
+
+/* ---- Mobile nav ---- */
+.cp-nav-toggle{display:none}
+.cp-nav-links{display:flex}
+.cp-nav-book-desktop{display:inline-flex}
+
+@media (max-width: 860px){
+  .cp-nav-links{
+    display:none;
+    position:absolute; top:76px; left:0; right:0;
+    flex-direction:column; align-items:stretch; gap:0;
+    background:var(--cream); border-bottom:1px solid var(--ink-100);
+    box-shadow:var(--shadow-md); padding:var(--space-4) var(--space-6);
+  }
+  .cp-nav-links.cp-open{display:flex}
+  .cp-nav-links a{padding:var(--space-3) 0; border-bottom:1px solid var(--ink-100)}
+  .cp-nav-links a:last-child{border-bottom:none}
+  .cp-nav-book-desktop{display:none}
+  .cp-nav-toggle{display:inline-flex}
+
+  h1{font-size:var(--text-3xl) !important}
+  h2{font-size:var(--text-2xl) !important}
+  .cp-hero-sub{font-size:var(--text-base) !important}
+  .cp-section-pad{padding-top:var(--space-12) !important;padding-bottom:var(--space-12) !important}
+  .cp-hero-pad{padding-top:var(--space-12) !important;padding-bottom:var(--space-14) !important}
+
+  .cp-grid-2, .cp-grid-3, .cp-grid-4, .cp-approach-grid, .cp-contact-grid{
+    grid-template-columns:1fr !important;
+  }
+  .cp-hero-stats{gap:var(--space-6) !important}
+  .cp-reviews-cols{column-count:1 !important}
+  .cp-footer-inner{flex-direction:column !important; align-items:flex-start !important; text-align:left !important}
+  .cp-decor-desktop{display:none !important}
+  .cp-cta-pad{padding:var(--space-8) var(--space-5) !important}
+}
+
+@media (max-width: 480px){
+  h1{font-size:var(--text-2xl) !important}
+  h2{font-size:var(--text-xl) !important}
+}
+
+/* Floortime page FAQ: native <details> styled like the accordion */
+.cp-ft-faq > summary { list-style: none; }
+.cp-ft-faq > summary::-webkit-details-marker { display: none; }
+.cp-ft-faq[open] .cp-accordion__chev { transform: rotate(180deg); }
