@@ -109,7 +109,7 @@
   }
 
   const answers = {
-    insurance: "We're in-network with Blue Cross Blue Shield, TennCare Select, and BlueCare. For other plans, we offer private pay (card, cash, or HSA) and can provide a superbill to submit for reimbursement. Katie Beckett Waiver and IEA funding may also apply.",
+    insurance: "We're in-network with Blue Cross Blue Shield, TennCare Select, and BlueCare. For other plans, we offer private pay (card, cash, or HSA) and can provide a superbill to submit for reimbursement. Katie Beckett Waiver and IEA funding may also apply. We're also a TEIS (Tennessee Early Intervention System) provider for children from birth to age 3.",
     start: "The easiest first step is a free phone consultation. We'll talk about your child and family and whether we're the right fit. Prefer to skip the call? Have your pediatrician fax a referral to (615) 617-5873 and we'll take it from there.",
   };
 

@@ -6,7 +6,8 @@ function CPFaq() {
   const { Accordion } = NSf;
   const { CPEyebrow } = window;
   const items = [
-    { title: "Do you take insurance?", content: "We're in-network with Blue Cross Blue Shield, TennCare Select, and BlueCare. For other plans, we offer private pay (card, cash, or HSA) and can provide a superbill to submit for reimbursement. Katie Beckett Waiver and IEA funding may also apply." },
+    { title: "Do you take insurance?", content: "We're in-network with Blue Cross Blue Shield, TennCare Select, and BlueCare. For other plans, we offer private pay (card, cash, or HSA) and can provide a superbill to submit for reimbursement. Katie Beckett Waiver and IEA funding may also apply. We're also a TEIS (Tennessee Early Intervention System) provider for children from birth to age 3." },
+    { title: "Are you a TEIS provider?", content: "Yes. Cultivate Play is a provider with TEIS (Tennessee Early Intervention System), which serves children from birth to age 3 with developmental delays or disabilities. If your child is enrolled in TEIS, ask your service coordinator about receiving services with us." },
     { title: "Where do sessions happen?", content: "In your home or community across Rutherford County (Murfreesboro, Smyrna, Lavergne, and nearby), in our Murfreesboro office, or via telehealth anywhere in Tennessee." },
     { title: "What is DIR Floortime?", content: "A developmental, relationship-based approach we weave into occupational therapy. We also coach parents to use Floortime with their child at home." },
     { title: "What ages do you work with?", content: "Children and teens, ages 0 to 18, with a focus on neurodiversity-affirming, strengths-based support." },

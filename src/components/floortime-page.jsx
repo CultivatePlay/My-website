@@ -6,7 +6,8 @@ const CALENDLY_FT = "https://calendly.com/alyssaengel-cultivate-play/30min";
 
 const FT_FAQ = [
   { q: "Do you offer DIR Floortime in Murfreesboro?", a: "Yes. Cultivate Play provides DIR Floortime in Murfreesboro and across Rutherford County, including Smyrna and La Vergne. Sessions happen in your home or community, at our Murfreesboro office at 1810 Ward Drive, or by telehealth anywhere in Tennessee." },
-  { q: "Is DIR Floortime covered by insurance?", a: "We weave Floortime into our occupational therapy sessions, which are billed as occupational therapy. We're in-network with Blue Cross Blue Shield, TennCare Select, and BlueCare. For other plans, we offer private pay (card, cash, or HSA) and can provide a superbill to submit for reimbursement. Katie Beckett Waiver and IEA funding may also apply." },
+  { q: "Is DIR Floortime covered by insurance?", a: "We weave Floortime into our occupational therapy sessions, which are billed as occupational therapy. We're in-network with Blue Cross Blue Shield, TennCare Select, and BlueCare. For other plans, we offer private pay (card, cash, or HSA) and can provide a superbill to submit for reimbursement. Katie Beckett Waiver and IEA funding may also apply. We're also a TEIS (Tennessee Early Intervention System) provider for children from birth to age 3." },
+  { q: "Are you a TEIS provider?", a: "Yes. Cultivate Play is a provider with TEIS (Tennessee Early Intervention System), which serves children from birth to age 3 with developmental delays or disabilities. If your child is enrolled in TEIS, ask your service coordinator about receiving services with us." },
   { q: "How is DIR Floortime different from ABA?", a: "Both are used with autistic children, but they start from different places. ABA (applied behavior analysis) generally uses structured teaching and reinforcement to build specific behaviors and skills. DIR Floortime is developmental and relationship-based. It follows your child's lead and interests and focuses on regulation, connection, communication, and emotional development, with new skills growing out of that foundation." },
   { q: "Can DIR Floortime help with social skills?", a: "Yes. Rather than teaching scripted social skills, Floortime builds the foundations underneath them: staying connected in back-and-forth play, solving problems together with another person, and using ideas and pretend play to express feelings. That way, social growth comes from genuine connection." },
   { q: "What ages do you work with?", a: "Children and teens, ages 0 to 18. Floortime looks different at every age, from floor play with toddlers to shared interests and problem solving with older kids and teens." },
@@ -184,27 +185,6 @@ function CPFloortimePage() {
                 <p style={{ color: "rgba(255,255,255,.8)", fontSize: "var(--text-sm)", lineHeight: 1.6, margin: 0 }}>{s.d}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Provider */}
-      <section id="provider" style={{ background: "var(--surface-page)" }}>
-        <div className="cp-section-pad cp-grid-2" style={{ maxWidth: "var(--container-lg)", margin: "0 auto", padding: "var(--space-24) var(--space-6)", display: "grid", gridTemplateColumns: "240px 1fr", gap: "var(--space-12)", alignItems: "center" }}>
-          <div style={{ width: 220, height: 220, borderRadius: "50%", overflow: "hidden", boxShadow: "var(--shadow-sm)", margin: "0 auto" }}>
-            <img src={(window.__resources && window.__resources.alyssaPhoto) || "/assets/img/alyssa-engel.jpg"} alt="Alyssa Engel, OTD, OTR/L, DIR-Proficient occupational therapist" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
-          <div>
-            <CPEyebrow>Your Floortime provider</CPEyebrow>
-            <h2 style={{ fontSize: "var(--text-3xl)", margin: "0 0 var(--space-4)" }}>Alyssa Engel, OTD, OTR/L, DIR-Proficient</h2>
-            <p style={{ fontSize: "var(--text-lg)", color: "var(--ink-600)", lineHeight: 1.6, margin: "0 0 var(--space-4)" }}>
-              Alyssa is an occupational therapist certified at the DIR-Proficient level through ICDL, the home of
-              DIRFloortime. She founded Cultivate Play in 2024 in response to a lack of neurodiversity-affirming
-              providers in Middle Tennessee, and she brings Floortime into her work with every child.
-            </p>
-            <p style={{ fontSize: "var(--text-base)", color: "var(--ink-600)", lineHeight: 1.6, margin: 0 }}>
-              She earned her Occupational Therapy Doctorate (OTD) from the University of Tennessee, Chattanooga.
-            </p>
           </div>
         </div>
       </section>

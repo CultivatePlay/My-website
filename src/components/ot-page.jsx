@@ -5,10 +5,11 @@
 
   const FAQ = [
     { q: "Do you take insurance for occupational therapy?", a: answers.insurance },
+    { q: "Are you a TEIS provider?", a: "Yes. Cultivate Play is a provider with TEIS (Tennessee Early Intervention System), which serves children from birth to age 3 with developmental delays or disabilities. If your child is enrolled in TEIS, ask your service coordinator about receiving services with us." },
     { q: "Do we need a referral from our doctor?", a: answers.start },
     { q: "Where do OT sessions happen?", a: "In your home or community across Rutherford County (Murfreesboro, Smyrna, La Vergne, and nearby), in our Murfreesboro office at 1810 Ward Drive, or by telehealth anywhere in Tennessee." },
     { q: "What ages do you work with?", a: "Children and teens, ages 0 to 18." },
-    { q: "What happens at the first evaluation?", a: "The evaluation is a relaxed, child-led play session. We get to know your child, learn what's going well and what feels hard, and talk with you about your family's priorities. Then we set goals together." },
+    { q: "What happens at the first evaluation?", a: "The evaluation is a relaxed, child-led play session. We get to know your child, learn what's going well and what feels hard, and talk with you about your family's priorities. Depending on your child's needs, it may also include standardized assessments and questionnaires for you to fill out, which help us understand your child more fully. Then we set goals together." },
     { q: "Do you work with autistic children?", a: "Yes. We are a neurodiversity-affirming practice, and many of the children we see are autistic, ADHD, or both. We support things like sensory needs, regulation, daily routines, and play in ways that respect how your child's brain works." },
   ];
 
@@ -25,7 +26,7 @@
 
   const steps = [
     { n: "1", t: "Free phone consult", d: "A no-pressure call to talk about your child and see whether we're the right fit." },
-    { n: "2", t: "Play-based evaluation", d: "A relaxed, child-led session to understand your child's strengths and where support helps." },
+    { n: "2", t: "Play-based evaluation", d: "A relaxed, child-led session to understand your child's strengths and where support helps. It may include standardized assessments and parent questionnaires." },
     { n: "3", t: "A plan built on strengths", d: "Goals we set together, around your family's routines, priorities, and your child's interests." },
     { n: "4", t: "Grow together", d: "Ongoing sessions at home, in the community, in office, or by telehealth, with progress you can see." },
   ];

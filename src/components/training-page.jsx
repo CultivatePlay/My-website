@@ -6,8 +6,8 @@
   const FAQ = [
     { q: "Who do you provide training for?", a: "Daycares, preschools, private schools, churches, camps, youth programs, and community small businesses. We train staff, teachers, and volunteers who work with children." },
     { q: "What topics can you cover?", a: "Sensory processing, neurodiversity, autism, ADHD, fine motor development, executive functioning, self-care skills, behavior, and inclusion. We can combine topics to fit what your team needs." },
-    { q: "Can training be tailored to our group?", a: "Yes. We'll talk with you about your setting, the children you serve, and what your team is finding hard, and build the training around that." },
-    { q: "How do we request a training?", a: "Call (615) 768-9170 or email info@cultivate-play.com with a little about your organization and what you're hoping to cover, and we'll follow up to plan it together." },
+    { q: "Can training be tailored to our group?", a: "Yes. We'll talk with you about your setting, the children you serve, and what your team is needing support in, and build the training around that." },
+    { q: "How do we request a training?", a: "Email info@cultivate-play.com with a little about your organization and what you're hoping to cover, and we'll follow up to plan it together." },
     { q: "Do you also provide therapy for children?", a: "Yes. Cultivate Play provides neurodiversity-affirming pediatric occupational therapy and DIR Floortime for children ages 0 to 18 across Rutherford County, plus telehealth anywhere in Tennessee." },
   ];
 
