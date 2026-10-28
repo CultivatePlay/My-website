@@ -15,6 +15,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGES = {  # source shell -> published file
     "src/pages/home.html": "index.html",
     "src/pages/floortime.html": "floortime/index.html",
+    "src/pages/occupational-therapy.html": "occupational-therapy/index.html",
+    "src/pages/training.html": "training/index.html",
 }
 CHROME = os.environ.get("CHROME_PATH")  # optional: use a specific Chromium binary
 

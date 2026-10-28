@@ -11,9 +11,9 @@ function CPServices() {
   const { Blob = Noop, LeafSprig = Noop, Sprout = Noop, Vine = Noop } = NSs;
   const { CPEyebrow } = window;
   const items = [
-    { icon: hand, tint: "green", age: "Ages 0–18", href: "#occupational-therapy", title: "Occupational Therapy", text: "Neurodiversity-affirming, strengths-based OT in your home, your community, or our office, turning your child's interests into meaningful growth." },
+    { icon: hand, tint: "green", age: "Ages 0–18", href: "/occupational-therapy/", title: "Occupational Therapy", text: "Neurodiversity-affirming, strengths-based OT in your home, your community, or our office, turning your child's interests into meaningful growth." },
     { icon: leaf, tint: "lavender", age: "Ages 0–18", href: "/floortime/", title: "DIR Floortime", text: "A developmental, relationship-based approach woven into therapy, plus parent coaching so you can use Floortime at home." },
-    { icon: chat, tint: "mint", age: "For teams & orgs", href: "#training", title: "Training & Education", text: "Coaching and workshops on sensory processing, neurodiversity, ADHD, executive functioning and more, for schools, daycares, and organizations." },
+    { icon: chat, tint: "mint", age: "For teams & orgs", href: "/training/", title: "Training & Education", text: "Coaching and workshops on sensory processing, neurodiversity, ADHD, executive functioning and more, for schools, daycares, and organizations." },
   ];
   const otSkills = [
     { t: "Sensory processing", d: "Supporting how your child takes in and responds to sights, sounds, textures, and movement so they can join in comfortably." },
@@ -81,6 +81,12 @@ function CPServices() {
             {["Autism", "ADHD (attention deficit hyperactivity disorder)", "PDA (Persistent Drive for Autonomy)", "Developmental delays", "Down syndrome", "Sensory processing disorder", "Developmental coordination disorder (dyspraxia)"].map((x) => (
               <span key={x} style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--green-700)", background: "var(--green-100)", padding: "6px 14px", borderRadius: "var(--radius-pill)" }}>{x}</span>
             ))}
+          </div>
+          <div style={{ marginTop: "var(--space-6)" }}>
+            <a href="/occupational-therapy/" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontWeight: 700, fontSize: "var(--text-base)", color: "var(--green-700)" }}>
+              Learn more about occupational therapy in Murfreesboro
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -189,7 +195,13 @@ function CPTraining() {
             <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", marginBottom: "var(--space-7)" }}>
               {topics.map((t) => (<span key={t} style={{ fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--green-700)", background: "var(--green-100)", padding: "6px 14px", borderRadius: "var(--radius-pill)" }}>{t}</span>))}
             </div>
-            <Button variant="primary" as="a" href="#contact">Request training</Button>
+            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--space-5)" }}>
+              <Button variant="primary" as="a" href="#contact">Request training</Button>
+              <a href="/training/" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontWeight: 700, fontSize: "var(--text-base)", color: "var(--green-700)" }}>
+              Learn more about training
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            </div>
           </div>
           <div>
             <div style={{ fontSize: "var(--text-xs)", fontWeight: 800, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-400)", marginBottom: "var(--space-4)" }}>Trainings we've provided</div>

@@ -84,9 +84,9 @@ function CPFooter({ onBook }) {
             <p style={{ margin: "4px 0 0", fontSize: "var(--text-sm)" }}>info@cultivate-play.com · (615) 768-9170</p>
           </div>
           <div style={{ display: "flex", gap: "var(--space-8)", fontSize: "var(--text-sm)" }}>
-            <a href="/#services" style={{ color: "rgba(255,255,255,.7)" }}>Services</a>
+            <a href="/occupational-therapy/" style={{ color: "rgba(255,255,255,.7)" }}>Occupational therapy</a>
             <a href="/floortime/" style={{ color: "rgba(255,255,255,.7)" }}>DIR Floortime</a>
-            <a href="/#approach" style={{ color: "rgba(255,255,255,.7)" }}>Approach</a>
+            <a href="/training/" style={{ color: "rgba(255,255,255,.7)" }}>Training</a>
             <a href="/#team" style={{ color: "rgba(255,255,255,.7)" }}>Team</a>
             <a href="/#faq" style={{ color: "rgba(255,255,255,.7)" }}>FAQ</a>
           </div>

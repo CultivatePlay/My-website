@@ -8,6 +8,7 @@ const FT_FAQ = [
   { q: "Do you offer DIR Floortime in Murfreesboro?", a: "Yes. Cultivate Play provides DIR Floortime in Murfreesboro and across Rutherford County, including Smyrna and La Vergne. Sessions happen in your home or community, at our Murfreesboro office at 1810 Ward Drive, or by telehealth anywhere in Tennessee." },
   { q: "Is DIR Floortime covered by insurance?", a: "We weave Floortime into our occupational therapy sessions, which are billed as occupational therapy. We're in-network with Blue Cross Blue Shield, TennCare Select, and BlueCare. For other plans, we offer private pay (card, cash, or HSA) and can provide a superbill to submit for reimbursement. Katie Beckett Waiver and IEA funding may also apply." },
   { q: "How is DIR Floortime different from ABA?", a: "Both are used with autistic children, but they start from different places. ABA (applied behavior analysis) generally uses structured teaching and reinforcement to build specific behaviors and skills. DIR Floortime is developmental and relationship-based. It follows your child's lead and interests and focuses on regulation, connection, communication, and emotional development, with new skills growing out of that foundation." },
+  { q: "Can DIR Floortime help with social skills?", a: "Yes. Rather than teaching scripted social skills, Floortime builds the foundations underneath them: staying connected in back-and-forth play, solving problems together with another person, and using ideas and pretend play to express feelings. That way, social growth comes from genuine connection." },
   { q: "What ages do you work with?", a: "Children and teens, ages 0 to 18. Floortime looks different at every age, from floor play with toddlers to shared interests and problem solving with older kids and teens." },
   { q: "Do parents take part in sessions?", a: "Yes, and we encourage it. Parent coaching is a core part of how we use Floortime, so you'll leave sessions with ideas you can use during everyday routines at home." },
   { q: "How do we get started?", a: "The easiest first step is a free phone consultation. We'll talk about your child and family and whether we're the right fit. Prefer to skip the call? Have your pediatrician fax a referral to (615) 617-5873 and we'll take it from there." },
@@ -129,6 +130,32 @@ function CPFloortimePage() {
                 <span key={x} style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--green-700)", background: "var(--green-100)", padding: "6px 14px", borderRadius: "var(--radius-pill)" }}>{x}</span>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social-emotional growth (FEDC 4 & 5, described without jargon) */}
+      <section id="social-emotional" style={{ background: "var(--lavender-50)" }}>
+        <div className="cp-section-pad" style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-24) var(--space-6)" }}>
+          <div style={{ maxWidth: 720, marginBottom: "var(--space-10)" }}>
+            <CPEyebrow>Social-emotional learning</CPEyebrow>
+            <h2 style={{ fontSize: "var(--text-4xl)", margin: "0 0 var(--space-4)" }}>Social and emotional growth, through play</h2>
+            <p style={{ fontSize: "var(--text-lg)", color: "var(--ink-600)", lineHeight: 1.6, margin: 0 }}>
+              Social-emotional skills grow out of relationships. In Floortime, we support the building blocks
+              that make things like friendships, sharing feelings, and working through frustration possible,
+              in ways that feel natural to your child and never ask them to mask who they are.
+            </p>
+          </div>
+          <div className="cp-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-6)" }}>
+            {[
+              { t: "Solving problems together", d: "Children learn to stay in long back-and-forth exchanges with a trusted adult to figure something out, like getting the lid off a container, finding a hidden toy, or building something together. Along the way, they practice reading facial expressions and gestures, showing what they want, and noticing how others respond. This shared problem solving builds flexibility, cooperation, and a growing sense of self." },
+              { t: "Using ideas to share feelings", d: "Through pretend play and conversation, children begin to use ideas to show what they want, think, and feel. A stuffed animal might be scared of the dark, or a toy car might be upset it lost the race. Playing out feelings like these with a partner who joins in helps children understand emotions, put them into words or play, and imagine what someone else might be feeling." },
+            ].map((s) => (
+              <div key={s.t} style={{ background: "var(--white)", border: "1.5px solid var(--ink-200)", borderRadius: "var(--radius-xl)", padding: "var(--space-7)", boxShadow: "var(--shadow-sm)" }}>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "var(--text-xl)", color: "var(--ink-900)", margin: "0 0 var(--space-3)" }}>{s.t}</h3>
+                <p style={{ fontSize: "var(--text-base)", color: "var(--ink-600)", lineHeight: 1.65, margin: 0 }}>{s.d}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

@@ -7,9 +7,9 @@ function CPNav({ onBook }) {
   const { Button } = NS;
   const [open, setOpen] = useState(false);
   const links = [
-    { label: "Services", href: "/#services" },
+    { label: "Occupational therapy", href: "/occupational-therapy/" },
     { label: "DIR Floortime", href: "/floortime/" },
-    { label: "Our approach", href: "/#approach" },
+    { label: "Training", href: "/training/" },
     { label: "Team", href: "/#team" },
     { label: "FAQ", href: "/#faq" },
     { label: "Contact", href: "#contact" },

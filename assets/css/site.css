@@ -1272,3 +1272,22 @@ img{max-width:100%}
 .cp-ft-faq > summary { list-style: none; }
 .cp-ft-faq > summary::-webkit-details-marker { display: none; }
 .cp-ft-faq[open] .cp-accordion__chev { transform: rotate(180deg); }
+
+/* Longer nav (service pages): keep labels on one line, collapse to the menu button below 1100px */
+.cp-nav-links a { white-space: nowrap; }
+@media (max-width: 1100px){
+  .cp-nav-links{
+    display:none;
+    position:absolute; top:76px; left:0; right:0;
+    flex-direction:column; align-items:stretch; gap:0;
+    background:var(--cream); border-bottom:1px solid var(--ink-100);
+    box-shadow:var(--shadow-md); padding:var(--space-4) var(--space-6);
+  }
+  .cp-nav-links.cp-open{display:flex}
+  .cp-nav-links a{padding:var(--space-3) 0; border-bottom:1px solid var(--ink-100)}
+  .cp-nav-links a:last-child{border-bottom:none}
+  .cp-nav-toggle{display:inline-flex}
+}
+@media (min-width: 861px) and (max-width: 1100px){
+  .cp-nav-toggle{margin-left:var(--space-3) !important}
+}
