@@ -82,16 +82,17 @@
     const { Button } = NS;
     return (
       <React.Fragment>
-        <Hero crumb="Resources" chip="Books · Podcasts · Social media · Toys"
+        <Hero crumb="Resources" chip="Books · Podcasts · Social media · Toys & games"
           title="Recommended Resources for Families"
+          noCall
           primary={<Button variant="primary" size="lg" as="a" href="#books">Browse resources</Button>}>
-          Neurodiversity-affirming books, podcasts, and voices we love, plus toys and sensory tools we use and
+          Neurodiversity-affirming books, podcasts, and voices we love, plus toys, games, and sensory tools we use and
           recommend. A good place to start learning alongside your child.
         </Hero>
 
         <nav aria-label="Resource sections" style={{ background: "var(--cream)", borderBottom: "1px solid var(--ink-100)" }}>
           <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "0 var(--space-6) var(--space-6)", display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "var(--space-3)" }}>
-            {[["#books", "Books"], ["#podcasts", "Podcasts"], ["#social", "Social media"], ["#toys", "Toys & sensory tools"]].map(([h, l]) => (
+            {[["#books", "Books"], ["#podcasts", "Podcasts"], ["#social", "Social media"], ["#toys", "Toys, games, and sensory tools"]].map(([h, l]) => (
               <a key={h} href={h} style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--green-700)", background: "var(--white)", border: "1.5px solid var(--green-200)", padding: "8px 16px", borderRadius: "var(--radius-pill)" }}>{l}</a>
             ))}
           </div>
@@ -135,7 +136,7 @@
         <section id="toys" style={{ background: "var(--green-600)", color: "#fff", scrollMarginTop: 90 }}>
           <div className="cp-section-pad cp-approach-grid" style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-24) var(--space-6)", display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "var(--space-12)", alignItems: "center" }}>
             <div>
-              <p className="cp-eyebrow" style={{ color: "var(--green-200)", margin: "0 0 var(--space-3)" }}>Toys, games & sensory tools</p>
+              <p className="cp-eyebrow" style={{ color: "var(--green-200)", margin: "0 0 var(--space-3)" }}>Toys, games, and sensory tools</p>
               <h2 style={{ fontSize: "var(--text-4xl)", color: "#fff", margin: "0 0 var(--space-5)" }}>Our favorite toys and tools</h2>
               <p style={{ fontSize: "var(--text-lg)", color: "rgba(255,255,255,.85)", lineHeight: 1.6, margin: 0 }}>
                 We keep our favorite toys, games, and sensory tools together in one Amazon storefront. Many of

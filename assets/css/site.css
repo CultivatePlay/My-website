@@ -1294,3 +1294,4 @@ img{max-width:100%}
 
 /* Featured card spans two columns on wider screens (Resources page) */
 @media (min-width: 861px){ .cp-span-2{ grid-column: span 2; } }
+@media (max-width: 860px){ .cp-teaser-pad{ padding: var(--space-6) !important; gap: var(--space-5) !important; } }

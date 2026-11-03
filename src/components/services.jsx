@@ -222,4 +222,28 @@ function CPTraining() {
   );
 }
 
-Object.assign(window, { CPServices, CPApproach, CPFloortime, CPTraining });
+function CPResourcesTeaser() {
+  const { CPEyebrow } = window;
+  const { Button } = NSs;
+  return (
+    <section id="resources" style={{ background: "var(--surface-page)", scrollMarginTop: 90 }}>
+      <div className="cp-section-pad" style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-16) var(--space-6) 0" }}>
+        <div className="cp-grid-2 cp-teaser-pad" style={{ display: "grid", gridTemplateColumns: "1.3fr 0.7fr", gap: "var(--space-8)", alignItems: "center", background: "var(--lavender-50)", border: "1.5px solid var(--lavender-100)", borderRadius: "var(--radius-2xl)", padding: "var(--space-10)" }}>
+          <div style={{ minWidth: 0 }}>
+            <CPEyebrow>Recommended resources</CPEyebrow>
+            <h2 style={{ fontSize: "var(--text-3xl)", margin: "0 0 var(--space-3)" }}>Keep learning between sessions</h2>
+            <p style={{ fontSize: "var(--text-lg)", color: "var(--ink-600)", lineHeight: 1.6, margin: 0 }}>
+              Our favorite neurodiversity-affirming books, podcasts, and voices to follow, plus the toys, games,
+              and sensory tools we use and recommend.
+            </p>
+          </div>
+          <div style={{ display: "flex", justifyContent: "flex-start", minWidth: 0 }}>
+            <Button variant="primary" size="lg" as="a" href="/resources/">Browse resources</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { CPServices, CPApproach, CPFloortime, CPTraining, CPResourcesTeaser });

@@ -6,7 +6,7 @@
   const Noop = () => null;
   const wrap = { maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-24) var(--space-6)" };
 
-  function Hero({ crumb, chip, title, children, credit, primary }) {
+  function Hero({ crumb, chip, title, children, credit, primary, noCall }) {
     const { Button, Vine = Noop, Flower = Noop, Blob = Noop } = NS;
     return (
       <section id="top" style={{ background: "var(--cream)", position: "relative", overflow: "hidden" }}>
@@ -22,7 +22,7 @@
           <p className="cp-hero-sub" style={{ fontSize: "var(--text-lg)", color: "var(--ink-600)", maxWidth: 600, margin: "var(--space-6) auto var(--space-8)", lineHeight: 1.6 }}>{children}</p>
           <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", justifyContent: "center" }}>
             {primary || <Button variant="primary" size="lg" as="a" href={CALENDLY} target="_blank" rel="noopener">Book a free consultation</Button>}
-            <Button variant="outline" size="lg" as="a" href="tel:16157689170">Call (615) 768-9170</Button>
+            {!noCall && <Button variant="outline" size="lg" as="a" href="tel:16157689170">Call (615) 768-9170</Button>}
           </div>
           {credit && <p style={{ fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--ink-500)", marginTop: "var(--space-6)" }}>{credit}</p>}
         </div>

@@ -13,6 +13,7 @@ function Site(){
       <window.CPTeam/>
       <window.CPTestimonials/>
       <window.CPReviews/>
+      <window.CPResourcesTeaser/>
       <window.CPFaq/>
     </main>
     <window.CPFooter onBook={open}/>
