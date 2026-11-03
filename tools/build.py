@@ -17,6 +17,7 @@ PAGES = {  # source shell -> published file
     "src/pages/floortime.html": "floortime/index.html",
     "src/pages/occupational-therapy.html": "occupational-therapy/index.html",
     "src/pages/training.html": "training/index.html",
+    "src/pages/resources.html": "resources/index.html",
 }
 CHROME = os.environ.get("CHROME_PATH")  # optional: use a specific Chromium binary
 

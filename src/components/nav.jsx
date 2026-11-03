@@ -10,6 +10,7 @@ function CPNav({ onBook }) {
     { label: "Occupational therapy", href: "/occupational-therapy/" },
     { label: "DIR Floortime", href: "/floortime/" },
     { label: "Training", href: "/training/" },
+    { label: "Resources", href: "/resources/" },
     { label: "Team", href: "/#team" },
     { label: "FAQ", href: "/#faq" },
     { label: "Contact", href: "#contact" },
