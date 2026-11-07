@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Scribble Sprouts web app. Same page as the Claude artifact, plus install and offline support. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Scribble Sprouts: Prewriting Practice</title>
+<meta name="description" content="Scribble Sprouts is a free prewriting practice app for kids and pediatric OTs. Children trace and copy pictures built from prewriting strokes, in 8 levels that follow the developmental sequence.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2E5AAE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1C2925" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Scribble Sprouts">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gluten:wght@500;700;800&family=Andika:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: a classroom bulletin board. Construction-paper board, taped paper sheets for every working surface, levels as a box of crayons. */
+:root{
+  --board:#2E5AAE; --board-deep:#21478F; --board-ink:#FFFFFF;
+  --sheet:#FFFFFF; --ink:#1D2333; --muted:#5D667A; --line:#D7DDE8; --label:#FFFDF4;
+  --tape:rgba(238,226,178,.9); --tape-edge:rgba(150,130,70,.28);
+  --accent:#E2483C; --accent-ink:#FFFFFF; --accent-soft:#FDE3DF; --gold:#F2B705;
+  --sticky:#FFE680; --sticky-ink:#3A3110;
+  --hw-red:#E8837B; --hw-blue:#93B2E3;
+  --paper:#FFFFFF; --surface:#FFFFFF; --grid:#DCE3EE; --ghost:#B5C2D4; --crayon:#3546C9; --go:#1FA463;
+  --good:#1E8550; --good-bg:#DDF3E6; --warn:#A8560C; --warn-bg:#FCEBD8;
+  --shadow:rgba(8,22,58,.32);
+  --font-display:"Gluten","Chalkboard SE","Comic Sans MS",cursive;
+  --font-body:"Andika","Trebuchet MS",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --board:#1C2925; --board-deep:#15201D; --board-ink:#E6EEE9;
+  --sheet:#283230; --ink:#ECF0EE; --muted:#A3AFAA; --line:#3B4744; --label:#313C39;
+  --tape:rgba(214,202,152,.34); --tape-edge:rgba(0,0,0,.3);
+  --accent:#FF7A66; --accent-ink:#2A0E09; --accent-soft:#46261F; --gold:#F5C542;
+  --sticky:#4F4520; --sticky-ink:#FFF3C4;
+  --hw-red:#B8615A; --hw-blue:#5A7BAE;
+  --paper:#222B29; --surface:#283230; --grid:#34413E; --ghost:#56655F; --crayon:#A9B4FF; --go:#3CCB86;
+  --good:#5BD495; --good-bg:#173A29; --warn:#F2A05A; --warn-bg:#3A2614;
+  --shadow:rgba(0,0,0,.5); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --board:#1C2925; --board-deep:#15201D; --board-ink:#E6EEE9;
+  --sheet:#283230; --ink:#ECF0EE; --muted:#A3AFAA; --line:#3B4744; --label:#313C39;
+  --tape:rgba(214,202,152,.34); --tape-edge:rgba(0,0,0,.3);
+  --accent:#FF7A66; --accent-ink:#2A0E09; --accent-soft:#46261F; --gold:#F5C542;
+  --sticky:#4F4520; --sticky-ink:#FFF3C4;
+  --hw-red:#B8615A; --hw-blue:#5A7BAE;
+  --paper:#222B29; --surface:#283230; --grid:#34413E; --ghost:#56655F; --crayon:#A9B4FF; --go:#3CCB86;
+  --good:#5BD495; --good-bg:#173A29; --warn:#F2A05A; --warn-bg:#3A2614;
+  --shadow:rgba(0,0,0,.5); color-scheme:dark}
+*{box-sizing:border-box}
+body{background-color:var(--board);color:var(--board-ink);font-family:var(--font-body);font-size:17px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 48px}
+.wrap{max-width:1120px;margin-inline:auto;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;margin:0;text-wrap:balance;line-height:1.1}
+button,select,input{font:inherit}
+button{cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* ---- header ---- */
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{font-size:2.3rem;font-weight:800;letter-spacing:-.01em;rotate:-1.5deg}
+.brand svg{width:60px;height:46px;color:var(--gold);flex:none}
+.kidbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.kidbar label{font-family:var(--font-display);font-size:1.05rem}
+select,input[type=text]{background:var(--sheet);color:var(--ink);border:2px solid var(--ink);border-radius:12px;padding:8px 12px;min-height:46px}
+.addkid{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.addkid input{flex:1 1 200px;min-width:0}
+
+/* ---- buttons ---- */
+.btn{border:2px solid var(--ink);background:var(--sheet);color:var(--ink);border-radius:12px;padding:8px 16px;min-height:46px;font-weight:700;display:inline-flex;align-items:center;gap:6px;box-shadow:0 3px 0 var(--ink);transition:translate .08s,box-shadow .08s}
+.btn:active{translate:0 2px;box-shadow:0 1px 0 var(--ink)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor;box-shadow:none}
+.btn.danger-armed{background:var(--warn-bg);border-color:var(--warn);color:var(--warn);box-shadow:0 3px 0 var(--warn)}
+.note{font-size:.88rem;opacity:.82}
+.hint{margin:0;opacity:.92}
+.label{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;opacity:.75}
+.empty{text-align:center;padding:24px;opacity:.82}
+.foot{display:flex;flex-direction:column;gap:10px;font-size:.9rem;padding-top:16px;margin-top:10px;border-top:2px dashed color-mix(in srgb,var(--board-ink) 35%,transparent)}
+.foot p{margin:0;opacity:.88;max-width:65ch}
+.footrow{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
+.footlink{color:inherit;font-weight:700}
+
+/* ---- tabs: paper tabs with a crayon band ---- */
+.tabs{display:flex;gap:6px;align-items:flex-end;border-bottom:4px solid var(--board-deep);padding-inline:6px;flex-wrap:wrap}
+.tabs button{border:0;background:var(--label);color:var(--ink);border-top:7px solid var(--tc);border-radius:12px 12px 0 0;padding:8px 22px 6px;min-height:48px;font-family:var(--font-display);font-weight:700;font-size:1.2rem;opacity:.72;translate:0 4px;transition:translate .12s,opacity .12s}
+.tabs button[aria-selected="true"]{opacity:1;translate:0 0;padding-bottom:10px}
+
+/* ---- paper sheets with masking tape ---- */
+.panel,.card,.done>div{background:var(--sheet);color:var(--ink);position:relative;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.05),0 14px 22px -14px var(--shadow)}
+.panel{padding:20px 18px 18px;display:flex;flex-direction:column;gap:12px}
+.panel::before,.card::before,.done>div::before{content:"";position:absolute;top:-11px;left:50%;width:92px;height:24px;translate:-50% 0;rotate:-2.5deg;background:var(--tape);box-shadow:0 1px 1px var(--tape-edge);
+  clip-path:polygon(3% 0,97% 0,100% 22%,96% 48%,100% 74%,97% 100%,3% 100%,0 76%,4% 50%,0 24%);pointer-events:none}
+.panel:nth-of-type(2n)::before{rotate:2deg;left:30%}
+.panel h3,.panel h2{font-size:1.45rem}
+
+/* ---- practice: crayon box of levels ---- */
+.levelbox{background:var(--board-deep);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:inset 0 3px 10px rgba(0,0,0,.28)}
+.levelbox h2{font-size:1.3rem}
+.levels{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:12px 14px;padding-top:6px}
+.crayon{--c:#888;position:relative;display:flex;align-items:stretch;background:none;border:0;padding:0 28px 0 0;color:var(--ink);text-align:left;min-height:68px;transition:translate .15s,filter .15s}
+.crayon::after{content:"";position:absolute;right:0;top:0;bottom:0;width:30px;background:var(--c);clip-path:polygon(0 10%,28% 10%,100% 45%,100% 55%,28% 90%,0 90%)}
+.crayon .wrapper{flex:1;display:flex;align-items:center;gap:10px;min-width:0;padding:9px 10px;border-left:12px solid var(--c);border-radius:10px 0 0 10px;
+  background:linear-gradient(var(--c),var(--c)) 0 0/100% 5px no-repeat,linear-gradient(var(--c),var(--c)) 0 100%/100% 5px no-repeat,var(--label)}
+.crayon:hover{translate:4px 0}
+.crayon[aria-pressed="true"]{translate:10px 0;filter:drop-shadow(0 6px 6px var(--shadow))}
+.crayon[aria-pressed="true"] .wrapper{background:linear-gradient(var(--c),var(--c)) 0 0/100% 5px no-repeat,linear-gradient(var(--c),var(--c)) 0 100%/100% 5px no-repeat,color-mix(in srgb,var(--c) 20%,var(--label))}
+.crayon .num{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--sheet);border:3px solid var(--c);font-family:var(--font-display);font-weight:800;font-size:1rem}
+.crayon.mastered .num{background:var(--gold);border-color:var(--gold);color:#3A2C00;font-size:1.1rem}
+.crayon .lvtxt{display:flex;flex-direction:column;min-width:0}
+.crayon b{font-family:var(--font-display);font-weight:700;font-size:1.08rem;line-height:1.1;display:flex;gap:6px;align-items:center}
+.crayon b .glyph{width:18px;height:18px}
+.crayon small{color:var(--muted);font-size:.76rem;font-weight:700}
+.pips{display:flex;gap:3px;flex-wrap:wrap;margin-top:4px}
+.pips i{width:10px;height:10px;border-radius:50%;border:2px solid var(--ghost)}
+.pips i.on{background:var(--c);border-color:var(--c)}
+.crayon .tag{position:absolute;top:-11px;right:34px;z-index:1;background:var(--accent);color:var(--accent-ink);font-family:var(--font-display);font-weight:700;font-size:.78rem;border-radius:6px;padding:1px 9px;rotate:4deg;box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.allbtn{border:2px dashed currentColor;background:transparent;border-radius:12px;padding:10px 14px;display:flex;flex-direction:column;justify-content:center;text-align:left;min-height:68px;color:inherit}
+.allbtn b{font-family:var(--font-display);font-size:1.1rem}
+.allbtn small{opacity:.8;font-size:.8rem}
+.allbtn[aria-pressed="true"]{border-style:solid;background:rgba(255,255,255,.1)}
+.lvlhead{display:flex;flex-direction:column;gap:4px}
+.lvlhead h2{font-size:1.9rem}
+.lvlhead .lvkicker{font-family:var(--font-display);font-size:1rem;opacity:.85}
+
+/* ---- picture cards: kid art taped to the board ---- */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:30px 20px;padding-top:8px}
+.card{border:0;padding:12px 12px 12px;display:flex;flex-direction:column;gap:8px;text-align:left;transition:rotate .15s,translate .15s}
+.card:nth-child(3n+1){rotate:-1.2deg}.card:nth-child(3n+2){rotate:.9deg}.card:nth-child(3n){rotate:-.4deg}
+.card:nth-child(3n+2)::before{rotate:3deg;left:40%}
+.card:hover{rotate:0deg;translate:0 -4px}
+.card canvas{width:100%;max-width:100%;aspect-ratio:4/3;background:var(--paper);display:block;outline:1px solid var(--line)}
+.card strong{font-family:var(--font-display);font-weight:700;font-size:1.25rem;line-height:1.1}
+.card .meta{display:flex;gap:4px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:.74rem;font-weight:700;padding:2px 8px;border-radius:999px;background:color-mix(in srgb,var(--ink) 7%,var(--sheet));color:var(--muted)}
+.chip .glyph{width:14px;height:14px}
+.chip.lvchip{background:var(--accent-soft);color:var(--ink)}
+.glyph{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ---- play ---- */
+.playbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.playbar h2{font-size:1.9rem;flex:1 1 auto;min-width:0}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dots span{width:18px;height:18px;border-radius:50%;border:2.5px solid color-mix(in srgb,var(--board-ink) 50%,transparent)}
+.dots span.now{border-color:var(--board-ink);scale:1.2}
+.stage{position:relative;width:100%;max-width:min(100%,max(320px,calc((100vh - 320px)*4/3)));max-width:min(100%,max(320px,calc((100dvh - 320px)*4/3)));margin-inline:auto}
+.stage canvas,.copystage canvas{display:block;width:100%;max-width:100%;aspect-ratio:4/3;background:var(--paper);touch-action:none;-webkit-user-select:none;user-select:none;border-radius:3px;box-shadow:0 18px 30px -16px var(--shadow)}
+.stage::before,.stage::after{content:"";position:absolute;top:-8px;width:90px;height:24px;background:var(--tape);z-index:1;pointer-events:none;clip-path:polygon(3% 0,97% 0,100% 22%,96% 48%,100% 74%,97% 100%,3% 100%,0 76%,4% 50%,0 24%)}
+.stage::before{left:-22px;rotate:-38deg}
+.stage::after{right:-22px;rotate:38deg}
+/* handwriting-paper strip: red top line, dashed blue midline, blue baseline */
+.tip{position:relative;margin:0 auto;width:min(100%,760px);text-align:center;font-family:var(--font-display);font-weight:700;font-size:1.5rem;line-height:1;color:var(--ink);background-color:var(--sheet);border-radius:3px;padding:.78em 1em .5em;
+  background-image:linear-gradient(var(--hw-red),var(--hw-red)),linear-gradient(var(--hw-blue),var(--hw-blue));background-size:100% 2px,100% 2px;background-position:0 .84em,0 1.57em;background-repeat:no-repeat}
+.tip::before{content:"";position:absolute;left:0;right:0;top:1.12em;border-top:2px dashed var(--hw-blue);opacity:.8}
+.tip:empty{visibility:hidden}
+.done{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.done>div{pointer-events:auto;padding:26px 28px 22px;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center;max-width:90%;rotate:-1.5deg}
+.done h3{font-size:2rem}
+.stars{font-size:2.4rem;letter-spacing:.15em;color:var(--gold);line-height:1}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.playarea{position:relative;padding-top:18px}
+.copystage{display:grid;grid-template-columns:2fr 3fr;gap:18px;align-items:start;width:100%;max-width:min(100%,max(340px,calc((100vh - 270px)*2.2)));max-width:min(100%,max(340px,calc((100dvh - 270px)*2.2)));margin-inline:auto}
+.copystage>div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.model canvas{touch-action:auto;outline:3px dashed color-mix(in srgb,var(--board-ink) 55%,transparent);outline-offset:4px}
+
+/* ---- create ---- */
+.tools{display:flex;flex-wrap:wrap;gap:6px}
+.tool{border:2px solid var(--ink);background:var(--sheet);color:var(--ink);border-radius:12px;min-height:48px;padding:6px 11px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.92rem;box-shadow:0 2px 0 var(--ink)}
+.tool[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}
+.swatches{display:flex;gap:10px;flex-wrap:wrap}
+.sw{width:40px;height:40px;border-radius:50%;border:3px solid var(--sheet);box-shadow:0 0 0 2px var(--line)}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 3px var(--ink);scale:1.1}
+.saverow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.saverow input{flex:1 1 220px;min-width:0}
+.mine{display:flex;flex-direction:column;gap:6px}
+.mine ul{list-style:none;margin:0;padding:0}
+.mine li{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+.mine canvas{width:76px;aspect-ratio:4/3;background:var(--paper);outline:1px solid var(--line);flex:none}
+.mine .nm{flex:1;min-width:0;font-weight:700}
+.makerlvl{margin:0;text-align:center;font-family:var(--font-display);font-size:1.15rem}
+
+/* ---- settings + progress ---- */
+.seg{display:inline-flex;border:2px solid var(--ink);border-radius:12px;overflow:hidden;background:var(--sheet);box-shadow:0 3px 0 var(--ink)}
+.seg button{border:0;background:var(--sheet);color:var(--ink);padding:8px 16px;min-height:44px;font-weight:700}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}
+.settings{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:flex-end}
+.settings>div{display:flex;flex-direction:column;gap:6px}
+.toggle{display:flex;align-items:center;gap:8px;font-weight:700;min-height:44px}
+.toggle input{width:22px;height:22px;accent-color:var(--accent)}
+.banner{background:var(--sticky);color:var(--sticky-ink);padding:14px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between;rotate:-.6deg;box-shadow:0 12px 18px -12px var(--shadow)}
+.banner p{margin:0;flex:1 1 260px}
+.banner .btn{background:transparent;color:inherit;border-color:currentColor;box-shadow:none}
+.strokes{display:flex;flex-direction:column}
+.srow{display:grid;grid-template-columns:minmax(150px,1.2fr) minmax(140px,1fr) 2fr;gap:10px 16px;align-items:center;padding:12px 0;border-top:1px dashed var(--line)}
+.srow:first-child{border-top:0}
+.sname{display:flex;align-items:center;gap:8px;font-weight:700}
+.sname small{display:block;font-weight:400;color:var(--muted);font-size:.8rem}
+.spark{width:100%;max-width:200px;height:44px}
+.stats{display:flex;flex-wrap:wrap;gap:6px 14px;font-variant-numeric:tabular-nums}
+.stat{display:flex;flex-direction:column;min-width:64px}
+.stat b{font-size:1.2rem}
+.stat span{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:700}
+.delta{font-size:.78rem;font-weight:700;padding:1px 7px;border-radius:999px;margin-left:4px}
+.delta.up{background:var(--good-bg);color:var(--good)}
+.delta.down{background:var(--warn-bg);color:var(--warn)}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.92rem}
+th{text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:6px 8px}
+td{padding:8px;border-top:1px solid var(--line);white-space:nowrap}
+textarea{width:100%;min-height:160px;border-radius:8px;border:2px solid var(--line);background:var(--label);color:var(--ink);padding:10px;font:inherit;font-size:.88rem}
+.panel .levels .crayon .wrapper{box-shadow:0 1px 0 var(--line)}
+@media (orientation:portrait),(max-width:700px){.copystage{grid-template-columns:1fr;max-width:min(100%,max(320px,calc((100vh - 280px)*.8)));max-width:min(100%,max(320px,calc((100dvh - 280px)*.8)))}.model{width:62%;margin-inline:auto}}
+@media (max-width:640px){.srow{grid-template-columns:1fr 1fr}.srow .stats{grid-column:1/-1}.brand h1{font-size:1.8rem}.tabs button{padding-inline:13px;font-size:1.05rem}.lvlhead h2,.playbar h2{font-size:1.5rem}.stage::before,.stage::after{width:60px}}
+@media (prefers-reduced-motion:reduce){.card,.crayon,.tabs button,.btn{transition:none}.card:hover,.crayon:hover{translate:none}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 52 40" aria-hidden="true"><path d="M3 31c4-13 8-13 10-4s5 9 8-1 6-10 9-1 4 6 9 5" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M39 30V15" fill="none" stroke="#3FAE5A" stroke-width="3.5" stroke-linecap="round"/><path d="M39 19c-7 0-11-4-11-10 7 0 11 4 11 10z" fill="#3FAE5A"/><path d="M39 16c0-7 4-11 11-11 0 7-4 11-11 11z" fill="#57C773"/></svg>
+      <h1>Scribble Sprouts</h1>
+    </div>
+    <div class="kidbar">
+      <label for="kidSel">Child</label>
+      <select id="kidSel"></select>
+      <button class="btn" id="addKidBtn" type="button">+ Add child</button>
+    </div>
+  </header>
+  <div class="banner" id="installTip" hidden><p><strong>Use it like an app.</strong> On iPad or iPhone, tap Share, then Add to Home Screen. On Android, open the ⋮ menu and choose Add to Home screen.</p><button class="btn" type="button" id="installX">Got it</button></div>
+  <div class="addkid" id="addKidRow" hidden>
+    <input type="text" id="kidName" placeholder="First name or client code" maxlength="30" aria-label="Child name">
+    <button class="btn primary" id="kidSave" type="button">Add</button>
+    <button class="btn ghost" id="kidCancel" type="button">Cancel</button>
+    <span class="note">Saved on this device only. First names or codes keep it private.</span>
+  </div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="t-practice" aria-selected="true" data-tab="practice" style="--tc:#E2483C">Practice</button>
+    <button role="tab" id="t-create" aria-selected="false" data-tab="create" style="--tc:#F2C230">Create</button>
+    <button role="tab" id="t-progress" aria-selected="false" data-tab="progress" style="--tc:#3FAE5A">Progress</button>
+  </nav>
+
+  <section id="tab-practice">
+    <div id="pickView" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div class="seg" id="modeSeg" role="group" aria-label="Practice mode"><button type="button" data-m="trace">Trace</button><button type="button" data-m="copy">Copy</button></div>
+        <p class="hint" id="modeHint" style="flex:1 1 240px"></p>
+      </div>
+      <div class="levelbox">
+        <h2>Pick a crayon, pick a level</h2>
+        <div class="levels" id="levels" role="group" aria-label="Levels"></div>
+        <p class="note" style="margin:0">Levels follow the typical developmental order for prewriting strokes (Beery VMI sequence). Ages are rough guides for when most children copy a stroke from a model. Go by the child's skills, not their age.</p>
+      </div>
+      <div class="lvlhead" id="lvlHead"></div>
+      <div class="cards" id="cards"></div>
+    </div>
+    <div id="playView" hidden style="display:flex;flex-direction:column;gap:10px">
+      <div class="playbar">
+        <button class="btn" id="backBtn" type="button">← Pictures</button>
+        <h2 id="playTitle"></h2>
+        <div class="dots" id="dots" aria-label="Lines finished"></div>
+        <button class="btn ghost" id="restartBtn" type="button">Start over</button>
+      </div>
+      <div class="playarea">
+        <div class="stage" id="traceStage">
+          <canvas id="play" aria-label="Tracing paper"></canvas>
+        </div>
+        <div class="copystage" id="copyStage" hidden>
+          <div class="model"><span class="label">Look</span><canvas id="model" aria-label="Picture to copy"></canvas></div>
+          <div class="pad"><span class="label">Draw here</span><canvas id="pad" aria-label="Blank paper for copying"></canvas></div>
+        </div>
+        <div class="done" id="doneCard" hidden>
+          <div>
+            <div class="stars" aria-hidden="true">★★★</div>
+            <h3 id="doneTitle">You drew it!</h3>
+            <div class="row">
+              <button class="btn primary" id="nextBtn" type="button">Next picture</button>
+              <button class="btn" id="againBtn" type="button">Draw it again</button>
+              <button class="btn ghost" id="pickBtn" type="button">Pick another</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="tip" id="tip" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section id="tab-create" hidden style="display:flex;flex-direction:column;gap:22px">
+    <div class="panel">
+      <div class="label">Add a stroke: pick one, then drag on the paper</div>
+      <div class="tools" id="tools"></div>
+      <div class="label">Color</div>
+      <div class="swatches" id="swatches"></div>
+      <div class="label">Background</div>
+      <div class="tools" id="bgs"></div>
+    </div>
+    <div class="stage"><canvas id="maker" aria-label="Drawing paper for building a picture"></canvas></div>
+    <p class="makerlvl" id="makerLvl"></p>
+    <p class="note" style="margin:0;text-align:center">Numbers show stroke order. Every stroke starts at its dot, so kids practice top-to-bottom, left-to-right and counterclockwise circles.</p>
+    <div class="saverow">
+      <button class="btn" id="undoBtn" type="button">Undo</button>
+      <button class="btn" id="clearBtn" type="button">Clear</button>
+      <input type="text" id="drawName" placeholder="Name this picture (e.g. Snowman)" maxlength="40" aria-label="Picture name">
+      <button class="btn primary" id="saveBtn" type="button">Save picture</button>
+    </div>
+    <p class="note" id="saveMsg" aria-live="polite" style="margin:0"></p>
+    <div class="panel mine">
+      <h3>Pictures</h3>
+      <ul id="mineList"></ul>
+    </div>
+  </section>
+
+  <section id="tab-progress" hidden style="display:flex;flex-direction:column;gap:28px"></section>
+  <footer class="foot">
+    <p>Children's names and practice history are saved only on this device. Nothing is sent to Cultivate Play or anyone else.</p>
+    <div class="footrow"><a class="btn" id="feedbackBtn" href="#" target="_blank" rel="noopener" hidden>Send feedback</a><a class="footlink" href="https://cultivate-play.com/" target="_blank" rel="noopener">Made by Cultivate Play Pediatric Therapy</a></div>
+  </footer>
+</div>
+
+<script>
+(function(){
+const W=800,H=600,KEY='squiggle-studio-v1'; /* storage key kept from the app's first name so saved progress carries over */
+const TYPES={vertical:'Vertical line',horizontal:'Horizontal line',circle:'Circle',diagonal:'Diagonal line',square:'Square',triangle:'Triangle',free:'Freehand'};
+const ORDER=['vertical','horizontal','circle','diagonal','square','triangle','free'];
+const KIDWORD={vertical:'line down',horizontal:'line across',circle:'circle',diagonal:'slanted line',square:'square',triangle:'triangle',free:'squiggle'};
+const GLYPH={vertical:'<path d="M14 4V24"/>',horizontal:'<path d="M4 14H24"/>',circle:'<circle cx="14" cy="14" r="9"/>',diagonal:'<path d="M6 6L22 22"/>',square:'<rect x="6" y="6" width="16" height="16"/>',triangle:'<path d="M14 5L5 22H23Z"/>',free:'<path d="M4 18C8 6 12 6 14 14S20 22 24 10"/>',cross:'<path d="M14 4V24M4 14H24"/>',x:'<path d="M6 6L22 22M22 6L6 22"/>',diagL:'<path d="M22 6L6 22"/>'};
+const glyph=t=>`<svg class="glyph" viewBox="0 0 28 28" aria-hidden="true">${GLYPH[t]||GLYPH.free}</svg>`;
+const COLORS=['#E8A400','#E2563B','#2F80ED','#27A85F','#8E5BD9','#F07A2E','#14A3A3','#8B5E3C'];
+const TOL={easy:46,medium:32,tricky:22};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- geometry ---------- */
+const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+function pathLen(p){let s=0;for(let i=1;i<p.length;i++)s+=dist(p[i-1],p[i]);return s}
+function resample(pts,step){
+  if(pts.length<2)return pts.map(p=>p.slice());
+  const out=[pts[0].slice()];let acc=0;
+  for(let i=1;i<pts.length;i++){
+    let a=pts[i-1].slice(),b=pts[i],d=dist(a,b);
+    while(acc+d>=step&&d>0){const t=(step-acc)/d;const p=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];out.push(p);a=p;d=dist(a,b);acc=0}
+    acc+=d;
+  }
+  const last=pts[pts.length-1];if(dist(out[out.length-1],last)>1)out.push(last.slice());
+  return out;
+}
+function segDist(p,a,b){const dx=b[0]-a[0],dy=b[1]-a[1],l=dx*dx+dy*dy;let t=l?((p[0]-a[0])*dx+(p[1]-a[1])*dy)/l:0;t=Math.max(0,Math.min(1,t));return Math.hypot(p[0]-a[0]-t*dx,p[1]-a[1]-t*dy)}
+function polyDist(p,pts){if(pts.length===1)return dist(p,pts[0]);let m=Infinity;for(let i=1;i<pts.length;i++){const d=segDist(p,pts[i-1],pts[i]);if(d<m)m=d}return m}
+function nearestIdx(p,pts){let m=Infinity,k=0;pts.forEach((q,i)=>{const d=dist(p,q);if(d<m){m=d;k=i}});return k}
+function area(p){let s=0;for(let i=0;i<p.length;i++){const a=p[i],b=p[(i+1)%p.length];s+=a[0]*b[1]-b[0]*a[1]}return s/2}
+const L=(x1,y1,x2,y2)=>resample([[x1,y1],[x2,y2]],8);
+function C(cx,cy,r){const n=Math.max(24,Math.round(2*Math.PI*r/8)),p=[];for(let i=0;i<=n;i++){const a=-Math.PI/2-i/n*2*Math.PI;p.push([cx+r*Math.cos(a),cy+r*Math.sin(a)])}return p}
+const R=(x,y,w,h)=>resample([[x,y],[x,y+h],[x+w,y+h],[x+w,y],[x,y]],8);
+const T=(x,y,w,h)=>resample([[x+w/2,y],[x,y+h],[x+w,y+h],[x+w/2,y]],8);
+const st=(type,pts,color,closed,k)=>{const o={type,pts:pts.map(p=>[Math.round(p[0]),Math.round(p[1])]),color,closed:!!closed};if(k)o.k=k;return o};
+
+/* ---------- levels: typical developmental order of prewriting strokes ----------
+   Each picture's level is the hardest stroke it uses. A cross (+) is a vertical and
+   horizontal stroke tagged k:'cross'; an X is two diagonals tagged k:'x'. */
+const LEVELS=[
+  {n:1,name:'Down lines',g:'vertical',age:'2–3',how:'Lines go top to bottom.'},
+  {n:2,name:'Across lines',g:'horizontal',age:'2½–3',how:'Lines go left to right. Mixes in down lines.'},
+  {n:3,name:'Circles',g:'circle',age:'3',how:'Start at the top and go counterclockwise. Mixes in down and across lines.'},
+  {n:4,name:'Crosses',g:'cross',age:'4',how:'A down line, then an across line through the middle. Crossing the midline of the shape.'},
+  {n:5,name:'Slanted lines',g:'diagonal',age:'4½',how:'Slants in both directions, always top to bottom.'},
+  {n:6,name:'Squares',g:'square',age:'4½–5',how:'Start at the top left corner. Stop and turn at each corner.'},
+  {n:7,name:'X shapes',g:'x',age:'5',how:'Two slanted lines that cross in the middle.'},
+  {n:8,name:'Triangles',g:'triangle',age:'5–5½',how:'Start at the top point: slant down, go across, slant back up.'}
+];
+const SLV={vertical:1,horizontal:2,circle:3,diagonal:5,square:6,triangle:8,free:1};
+function levelOf(d){let m=1;d.strokes.forEach(s=>{m=Math.max(m,s.k==='cross'?4:s.k==='x'?7:SLV[s.type]||1)});return m}
+const byLevel=()=>S.drawings.map((d,i)=>({d,i,l:levelOf(d)})).sort((a,b)=>a.l-b.l||a.i-b.i).map(x=>x.d);
+
+/* ---------- scoring ---------- */
+function scoreStroke(tpl,childRaw,tol){
+  const child=resample(childRaw,6);
+  const tp=tpl.pts;
+  const cov=tp.filter(p=>polyDist(p,child)<=tol).length/tp.length;
+  const acc=child.filter(p=>polyDist(p,tp)<=tol*1.25).length/child.length;
+  const start=dist(child[0],tp[0])<=tol*1.6;
+  let dir;
+  if(tpl.closed){dir=Math.sign(area(child))===Math.sign(area(tp))}
+  else{dir=nearestIdx(child[0],tp)<nearestIdx(child[child.length-1],tp)}
+  const short=!tpl.closed&&nearestIdx(child[child.length-1],tp)<tp.length*0.8&&dir;
+  const score=Math.round(100*(0.45*cov+0.35*acc+0.1*start+0.1*dir));
+  return {cov:+cov.toFixed(2),acc:+acc.toFixed(2),start,dir,short,score,pass:cov>=0.75&&acc>=0.65};
+}
+
+/* copying: compare shape only (position and size are free), by resampling both
+   strokes to N points, centering on the bounding box and scaling by its long side */
+const COPYTOL={easy:.18,medium:.13,tricky:.09};
+function bbox(p){let a=Infinity,b=Infinity,c=-Infinity,d=-Infinity;p.forEach(q=>{a=Math.min(a,q[0]);b=Math.min(b,q[1]);c=Math.max(c,q[0]);d=Math.max(d,q[1])});return {cx:(a+c)/2,cy:(b+d)/2,size:Math.max(c-a,d-b)}}
+function resampleN(p,n){const len=pathLen(p);if(!len)return Array.from({length:n},()=>p[0].slice());const r=resample(p,len/(n-1));while(r.length<n)r.push(p[p.length-1].slice());return r.slice(0,n)}
+function norm(p,n){const r=resampleN(p,n),b=bbox(r),s=b.size||1;return r.map(q=>[(q[0]-b.cx)/s,(q[1]-b.cy)/s])}
+function meanD(a,b){let s=0;for(let i=0;i<a.length;i++)s+=dist(a[i],b[i]);return s/a.length}
+function copyScore(tpl,child,lvl){
+  const n=32,Tn=norm(tpl.pts,n),Cn=norm(child,n);let err,dir;
+  if(tpl.closed){
+    const t=Tn.slice(0,n-1),c=Cn.slice(0,n-1),rc=[...c].reverse();let best=Infinity;
+    for(let k=0;k<n-1;k++){const sh=c.slice(k).concat(c.slice(0,k)),sr=rc.slice(k).concat(rc.slice(0,k));best=Math.min(best,meanD(t,sh),meanD(t,sr))}
+    err=best;dir=Math.sign(area(child))===Math.sign(area(tpl.pts));
+  }else{const f=meanD(Tn,Cn),r=meanD(Tn,[...Cn].reverse());err=Math.min(f,r);dir=f<=r}
+  const start=dist(Cn[0],Tn[0])<.35;
+  /* corners separate a circle from a square or triangle, which overall shape error alone can miss */
+  const kc=corners(child),need=tpl.type==='square'?3:tpl.type==='triangle'?2:0;
+  const cornerOk=need?kc>=need-(lvl==='easy'?1:0):tpl.type==='circle'?kc<=1:true;
+  if(!cornerOk)err=Math.max(err,COPYTOL[lvl]+.05);
+  const shape=Math.max(0,Math.min(1,1-err/.3));
+  return {err:+err.toFixed(3),start,dir,corners:kc,score:Math.round(100*(.7*shape+.15*start+.15*dir)),pass:err<=COPYTOL[lvl]};
+}
+function corners(p){
+  const n=48,q=resampleN(p,n),w=2;let c=0,inC=false;
+  for(let i=w;i<n-w;i++){
+    const a1=Math.atan2(q[i][1]-q[i-w][1],q[i][0]-q[i-w][0]),a2=Math.atan2(q[i+w][1]-q[i][1],q[i+w][0]-q[i][0]);
+    let d=Math.abs(a2-a1);if(d>Math.PI)d=2*Math.PI-d;
+    if(d>1.05){if(!inC){c++;inC=true}}else inC=false;
+  }
+  return c;
+}
+
+/* ---------- data ---------- */
+function seedDrawings(){
+  const Y='#E8A400',O='#F07A2E',B='#2F80ED',G='#27A85F',Rd='#E2563B',Br='#8B5E3C',Cl='#5B7BA6',Pu='#8E5BD9',Te='#14A3A3';
+  const V=(x,y1,y2,c)=>st('vertical',L(x,y1,x,y2),c),Hz=(x1,x2,y,c)=>st('horizontal',L(x1,y,x2,y),c),D=(x1,y1,x2,y2,c,k)=>st('diagonal',L(x1,y1,x2,y2),c,0,k);
+  const O_=(cx,cy,r,c)=>st('circle',C(cx,cy,r),c,1);
+  const plus=(cx,cy,w,h,c)=>[st('vertical',L(cx,cy-h/2,cx,cy+h/2),c,0,'cross'),st('horizontal',L(cx-w/2,cy,cx+w/2,cy),c,0,'cross')];
+  const ex=(cx,cy,r,c)=>[D(cx-r,cy-r,cx+r,cy+r,c,'x'),D(cx+r,cy-r,cx-r,cy+r,c,'x')];
+  const RAIN=[Rd,O,Y,G,B,Pu];
+  return [
+    /* Level 1: down lines */
+    {id:'candles',bg:'cake',name:'Birthday Candles',strokes:[200,300,400,500,600].map((x,i)=>V(x,170,430,RAIN[i]))},
+    {id:'grass',bg:{k:'meadow',g:520},name:'Tall Grass',strokes:[120,200,280,360,440,520,600,680].map((x,i)=>V(x,[300,240,280,220,270,230,290,250][i],520,G))},
+    {id:'drops',bg:{k:'gray',g:540},name:'Rain Drops',strokes:[[160,70,190],[320,140,260],[480,60,180],[640,130,250],[240,330,450],[400,380,500],[560,330,450]].map(([x,a,b])=>V(x,a,b,B))},
+    {id:'fence',bg:{k:'yard',g:470},name:'Picket Fence',strokes:[160,256,352,448,544,640].map(x=>V(x,170,500,Br))},
+    /* Level 2: across lines */
+    {id:'ladder',bg:{k:'yard',g:540},name:'Ladder',strokes:[V(300,60,560,Br),V(500,60,560,Br),...[140,240,340,440].map(y=>Hz(300,500,y,Rd))]},
+    {id:'stairs',bg:'stairs',name:'Stairs',strokes:[Hz(160,280,140,Te),V(280,140,240,Te),Hz(280,400,240,Te),V(400,240,340,Te),Hz(400,520,340,Te),V(520,340,440,Te),Hz(520,640,440,Te)]},
+    {id:'flag',bg:{k:'yard',g:545},name:'Striped Flag',strokes:[V(200,60,560,Br),Hz(200,560,110,Te),Hz(200,560,170,Y),Hz(200,560,230,Te),Hz(200,560,290,Y),Hz(200,560,350,Te)]},
+    {id:'garden',bg:{k:'yard',g:440},name:'Garden Fence',strokes:[Hz(110,690,260,Br),Hz(110,690,420,Br),...[150,275,400,525,650].map(x=>V(x,200,500,O))]},
+    /* Level 3: circles */
+    {id:'lolly',bg:'party',name:'Lollipops',strokes:[O_(270,200,90,Rd),V(270,290,540,Br),O_(530,230,80,Pu),V(530,310,540,Br)]},
+    {id:'balloons',bg:'sky',name:'Balloons',strokes:[O_(250,180,75,Rd),O_(400,140,80,B),O_(550,180,75,Y),V(250,255,520,Cl),V(400,220,520,Cl),V(550,255,520,Cl)]},
+    {id:'rain',bg:{k:'gray',g:500},name:'Rain Cloud',strokes:[O_(300,210,70,Cl),O_(400,180,85,Cl),O_(500,210,70,Cl),
+      V(290,320,400,B),V(370,340,420,B),V(450,320,400,B),V(530,340,420,B)]},
+    {id:'snowman',bg:{k:'snow',g:520},name:'Snowman',strokes:[O_(400,145,60,Cl),O_(400,290,85,Cl),O_(400,470,100,Cl),Hz(210,310,280,Br),Hz(490,590,280,Br)]},
+    {id:'cater',bg:'leaf',name:'Caterpillar',strokes:[O_(160,340,55,G),O_(260,340,55,G),O_(360,340,55,G),O_(460,340,55,G),O_(580,320,70,Te),
+      V(160,395,450,Br),V(260,395,450,Br),V(360,395,450,Br),V(460,395,450,Br),V(555,180,255,Br),V(605,180,255,Br)]},
+    /* Level 4: crosses */
+    {id:'pizza',bg:'pizza',name:'Pizza',strokes:[O_(400,300,200,O),...plus(400,300,400,400,Rd)]},
+    {id:'twinkle',bg:'night',name:'Twinkle Stars',strokes:[...plus(220,170,140,140,Y),...plus(560,140,110,110,Y),...plus(380,360,180,180,Y),...plus(640,440,120,120,Y),...plus(170,470,100,100,Y)]},
+    {id:'scare',bg:{k:'farm',g:500},name:'Scarecrow',strokes:[O_(400,140,65,Y),Hz(310,490,72,Br),st('vertical',L(400,205,400,540),Br,0,'cross'),st('horizontal',L(200,300,600,300),Br,0,'cross')]},
+    {id:'plane',bg:'sky',name:'Airplane',strokes:[...plus(400,300,560,360,B),V(160,240,360,B)]},
+    /* Level 5: slanted lines */
+    {id:'tent',bg:{k:'night',g:480},name:'Tent',strokes:[D(400,100,180,480,O),D(400,100,620,480,O),Hz(120,680,480,Br),V(400,300,480,Br)]},
+    {id:'mountains',bg:{k:'yard',g:470},name:'Mountains',strokes:[O_(670,110,50,Y),D(280,150,100,480,G),D(280,150,460,480,G),D(540,220,400,480,Te),D(540,220,700,480,Te)]},
+    {id:'sun',bg:'sky',name:'Sunny Day',strokes:[O_(400,300,105,Y),
+      V(400,50,150,O),V(400,450,550,O),Hz(170,270,300,O),Hz(530,630,300,O),
+      D(225,125,295,195,O),D(575,125,505,195,O),D(505,405,575,475,O),D(295,405,225,475,O)]},
+    {id:'windy',bg:{k:'gray',g:470},name:'Windy Rain',strokes:[O_(320,170,80,Cl),O_(460,160,95,Cl),...[260,340,420,500,580].map(x=>D(x,290,x-50,400,B))]},
+    {id:'kite',bg:'sky',name:'Kite',strokes:[D(400,70,250,270,Pu),D(400,70,550,270,Pu),D(250,270,400,470,Pu),D(550,270,400,470,Pu),
+      st('vertical',L(400,70,400,470),Rd,0,'cross'),st('horizontal',L(250,270,550,270),Rd,0,'cross'),V(400,470,580,Br)]},
+    /* Level 6: squares */
+    {id:'gift',bg:{k:'party',g:500},name:'Gift Box',strokes:[st('square',R(250,200,300,300),Rd,1),...plus(400,350,300,300,Y),O_(370,170,30,Y),O_(430,170,30,Y)]},
+    {id:'tower',bg:{k:'room',g:530},name:'Block Tower',strokes:[st('square',R(330,110,140,140),Rd,1),st('square',R(330,250,140,140),B,1),st('square',R(330,390,140,140),Y,1)]},
+    {id:'robot',bg:{k:'room',g:560},name:'Robot',strokes:[V(400,30,90,Cl),st('square',R(320,90,160,130),Cl,1),O_(370,155,18,B),O_(430,155,18,B),st('square',R(280,240,240,200),Cl,1),
+      Hz(160,280,320,Cl),Hz(520,640,320,Cl),V(340,440,560,Cl),V(460,440,560,Cl)]},
+    {id:'truck',bg:{k:'road',g:480},name:'Truck',strokes:[st('square',R(150,220,320,200),G,1),st('square',R(470,290,180,130),B,1),O_(250,470,50,Br),O_(560,470,50,Br)]},
+    /* Level 7: X shapes */
+    {id:'crate',bg:{k:'room',g:450},name:'Wooden Crate',strokes:[st('square',R(250,150,300,300),Br,1),D(250,150,550,450,Br,'x'),D(550,150,250,450,Br,'x')]},
+    {id:'ttt',bg:'notebook',name:'Tic-Tac-Toe',strokes:[V(330,90,510,Cl),V(470,90,510,Cl),Hz(190,610,230,Cl),Hz(190,610,370,Cl),
+      ...ex(260,160,40,Rd),O_(400,300,45,B),...ex(540,440,40,Rd)]},
+    {id:'night',bg:'night',name:'Starry Night',strokes:[O_(640,130,60,Y),...ex(200,150,45,Y),...ex(420,110,35,Y),...ex(300,330,40,Y),...ex(560,380,50,Y),...plus(160,470,80,80,Y),...plus(450,500,70,70,Y)]},
+    {id:'map',bg:'island',name:'Treasure Island',strokes:[O_(420,330,185,G),
+      D(380,290,460,370,Rd,'x'),D(460,290,380,370,Rd,'x'),
+      st('vertical',L(110,40,110,160),Br,0,'cross'),st('horizontal',L(50,100,170,100),Br,0,'cross')]},
+    /* Level 8: triangles */
+    {id:'hat',bg:'party',name:'Party Hat',strokes:[O_(400,100,35,Rd),st('triangle',T(290,135,220,330),Pu,1),O_(400,250,16,Y),O_(370,330,18,Y),O_(430,400,18,Y)]},
+    {id:'tree',bg:{k:'snow',g:540},name:'Pine Tree',strokes:[st('triangle',T(260,50,280,200),G,1),st('triangle',T(210,190,380,260),G,1),V(370,450,560,Br),V(430,450,560,Br),Hz(370,430,560,Br)]},
+    {id:'house',bg:{k:'yard',g:500},name:'Little House',strokes:[st('square',R(250,270,300,230),Rd,1),
+      st('triangle',T(220,90,360,180),Br,1),
+      Hz(370,430,380,B),V(370,380,500,B),V(430,380,500,B)]},
+    {id:'boat',bg:{k:'sea',g:460},name:'Sailboat',strokes:[V(400,60,420,Br),st('triangle',T(250,90,300,290),O,1),Hz(180,620,420,Br),D(180,420,260,510,Br),D(620,420,540,510,Br),Hz(260,510,540,510,Br)]}
+  ];
+}
+function seedExample(kid,drawings,mode){
+  let s=mode==='copy'?29:11;const rnd=()=>(s=(s*16807)%2147483647)/2147483647;
+  const off=mode==='copy'?-12:0;
+  const base={vertical:60,horizontal:56,circle:42,diagonal:33,square:30,triangle:26,free:50};
+  const out=[],now=Date.now(),day=864e5;
+  for(let k=0;k<7;k++){
+    const t0=now-(27-k*4)*day+(mode==='copy'?16:15)*3600e3,d=drawings[(k+(mode==='copy'?1:0))%drawings.length],sid='ex'+mode+k;
+    d.strokes.forEach((stk,i)=>{
+      for(let tries=1;tries<=3;tries++){
+        const sc=Math.max(12,Math.min(98,Math.round(base[stk.type]+off+k*6+(rnd()-.5)*20+(tries-1)*7)));
+        const pass=sc>=62;
+        const place=mode==='copy'&&pass&&i>0?rnd()<.35+k*.08:null;
+        out.push({kid,sid,mode,d:d.id,type:stk.type,t:t0+i*45e3+tries*9e3,score:sc,cov:+Math.min(1,sc/90).toFixed(2),acc:+Math.min(1,(sc+8)/95).toFixed(2),start:rnd()<.5+k*.07,dir:rnd()<.45+k*.08,pass,place,ex:1});
+        if(pass)break;
+      }
+    });
+  }
+  return out;
+}
+function load(){try{const v=localStorage.getItem(KEY);return v?JSON.parse(v):null}catch(e){return null}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+let S=load();
+if(!S||!Array.isArray(S.drawings)){
+  const dr=seedDrawings(),kid={id:'k_ex',name:'Example child',tol:'medium',ex:1};
+  S={v:1,kids:[kid],active:kid.id,drawings:dr,seeded:dr.map(d=>d.id),attempts:seedExample(kid.id,dr,'trace'),settings:{sound:true,ghost:true}};save();
+}
+/* starter pictures: refresh their stroke data and add new ones once (a starter the user deleted stays deleted) */
+(function(){
+  const seeds=seedDrawings(),ids=new Set(seeds.map(d=>d.id));
+  if(!Array.isArray(S.seeded))S.seeded=['sun','house','rain','map'];
+  S.drawings=S.drawings.map(d=>!d.custom&&ids.has(d.id)?seeds.find(x=>x.id===d.id):d);
+  seeds.forEach(d=>{if(!S.seeded.includes(d.id)){S.seeded.push(d.id);if(!S.drawings.some(x=>x.id===d.id))S.drawings.push(d)}});
+  save();
+})();
+S.settings=Object.assign({sound:true,ghost:true,mode:'trace',pmode:'trace'},S.settings||{});
+(function(){const ex=S.kids.find(k=>k.ex);if(ex&&!S.attempts.some(a=>a.kid===ex.id&&a.mode==='copy')){S.attempts.push(...seedExample(ex.id,seedDrawings(),'copy'));save()}})();
+const activeKid=()=>S.kids.find(k=>k.id===S.active)||null;
+const uid=p=>p+Math.random().toString(36).slice(2,9);
+
+/* ---------- theme colors for canvas ---------- */
+let CV={};
+function readVars(){const cs=getComputedStyle(document.documentElement);['paper','grid','ghost','crayon','go','ink','surface','warn','line'].forEach(n=>CV[n]=cs.getPropertyValue('--'+n).trim())}
+readVars();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{readVars();redrawAll()});
+new MutationObserver(()=>{readVars();redrawAll()}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+/* ---------- scene backgrounds ----------
+   Painted under the dot grid with translucent colors so they sit quietly behind the strokes on light or dark paper. */
+const SCENE_PICK=[['none','Plain paper'],['sky','Sky'],['yard','Grass'],['night','Night'],['sea','Water'],['snow','Snow'],['road','Road'],['room','Room'],['party','Party'],['notebook','Notebook']];
+function scene(ctx,bg){
+  if(!bg)return;const t=typeof bg==='string'?{k:bg}:bg,k=t.k,g=t.g||500;
+  let seed=k.length*977+g;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  const rect=(c,x,y,w,h)=>{ctx.fillStyle=c;ctx.fillRect(x,y,w,h)};
+  const sky=(to,top='rgba(110,170,235,.34)',bot='rgba(110,170,235,.06)')=>{const gr=ctx.createLinearGradient(0,0,0,to);gr.addColorStop(0,top);gr.addColorStop(1,bot);rect(gr,0,0,W,to)};
+  const blob=(c,pts)=>{ctx.fillStyle=c;pts.forEach(([x,y,r])=>{ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill()})};
+  const cloud=(x,y,s,c='rgba(255,255,255,.75)')=>blob(c,[[x,y,22*s],[x+26*s,y-10*s,28*s],[x+56*s,y,22*s],[x+28*s,y+8*s,22*s]]);
+  const grass=(y)=>{rect('rgba(70,165,80,.30)',0,y,W,H-y);ctx.strokeStyle='rgba(50,140,60,.35)';ctx.lineWidth=3;for(let x=10;x<W;x+=26){const h=8+rnd()*10,yy=y+6+rnd()*(H-y-20);ctx.beginPath();ctx.moveTo(x,yy);ctx.lineTo(x-4,yy-h);ctx.moveTo(x+6,yy);ctx.lineTo(x+9,yy-h);ctx.stroke()}};
+  const stars=(n,maxY)=>{for(let i=0;i<n;i++){const x=rnd()*W,y=rnd()*maxY,r=1+rnd()*2;blob('rgba(255,250,220,.75)',[[x,y,r]])}};
+  const floor=(y)=>{rect('rgba(240,205,160,.16)',0,0,W,y);rect('rgba(180,125,75,.30)',0,y,W,H-y);ctx.strokeStyle='rgba(120,80,40,.25)';ctx.lineWidth=2;for(let yy=y+22;yy<H;yy+=24){ctx.beginPath();ctx.moveTo(0,yy);ctx.lineTo(W,yy);ctx.stroke()}};
+  const water=(y)=>{rect('rgba(50,135,200,.32)',0,y,W,H-y);ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=3;for(let yy=y+24;yy<H;yy+=34)for(let x=(yy/34%2)*40;x<W;x+=80){ctx.beginPath();ctx.arc(x+20,yy,14,Math.PI*1.1,Math.PI*1.9);ctx.stroke()}};
+  switch(k){
+    case 'sky':sky(H);cloud(90,90,1.1);cloud(600,70,.9);cloud(560,500,.8);break;
+    case 'yard':case 'farm':sky(g);cloud(70,70,.9);cloud(620,60,.8);grass(g);
+      if(k==='farm'){ctx.strokeStyle='rgba(150,110,40,.3)';ctx.lineWidth=4;for(let x=-200;x<W;x+=60){ctx.beginPath();ctx.moveTo(x+(W/2-x)*.0,H);ctx.lineTo(W/2+(x-W/2)*.25,g+8);ctx.stroke()}}break;
+    case 'meadow':sky(g);blob('rgba(255,200,60,.45)',[[720,80,42]]);rect('rgba(140,95,55,.30)',0,g,W,H-g);break;
+    case 'gray':sky(g,'rgba(120,135,155,.42)','rgba(120,135,155,.10)');rect('rgba(110,120,130,.22)',0,g,W,H-g);
+      ctx.fillStyle='rgba(80,140,210,.35)';ctx.beginPath();ctx.ellipse(W/2,g+(H-g)/2,230,Math.max(14,(H-g)/3),0,0,7);ctx.fill();break;
+    case 'night':{const gr=ctx.createLinearGradient(0,0,0,H);gr.addColorStop(0,'rgba(16,24,70,.82)');gr.addColorStop(1,'rgba(40,40,110,.62)');rect(gr,0,0,W,H);stars(70,t.g||H);
+      if(t.g)rect('rgba(30,70,45,.75)',0,g,W,H-g);break}
+    case 'sea':sky(g);cloud(100,80,.9);cloud(620,110,.7);water(g);break;
+    case 'island':rect('rgba(50,135,200,.30)',0,0,W,H);water(0);blob('rgba(120,200,220,.35)',[[420,330,215]]);blob('rgba(232,196,120,.60)',[[420,330,195]]);break;
+    case 'snow':sky(g,'rgba(150,185,225,.36)','rgba(150,185,225,.08)');ctx.fillStyle='rgba(235,242,250,.85)';ctx.beginPath();ctx.moveTo(0,g);ctx.quadraticCurveTo(W*.3,g-30,W*.55,g);ctx.quadraticCurveTo(W*.8,g+25,W,g-10);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.fill();
+      for(let i=0;i<45;i++)blob('rgba(255,255,255,.85)',[[rnd()*W,rnd()*(g-10),2+rnd()*2.5]]);break;
+    case 'road':sky(g-20);cloud(80,80,.9);cloud(640,70,.8);rect('rgba(70,165,80,.30)',0,g-20,W,20);rect('rgba(80,85,95,.38)',0,g,W,H-g);
+      ctx.strokeStyle='rgba(255,215,40,.75)';ctx.lineWidth=7;ctx.setLineDash([40,30]);ctx.beginPath();ctx.moveTo(0,(g+H)/2+20);ctx.lineTo(W,(g+H)/2+20);ctx.stroke();ctx.setLineDash([]);break;
+    case 'room':floor(g);break;
+    case 'party':rect('rgba(250,190,210,.18)',0,0,W,H);for(let i=0;i<60;i++){const c=['rgba(226,72,60,.4)','rgba(242,194,48,.5)','rgba(59,111,216,.4)','rgba(63,174,90,.4)'][i%4];ctx.save();ctx.translate(rnd()*W,rnd()*(t.g||H));ctx.rotate(rnd()*3);ctx.fillStyle=c;ctx.fillRect(-6,-3,12,6);ctx.restore()}
+      if(t.g)floor(g);break;
+    case 'notebook':rect('rgba(255,255,255,.05)',0,0,W,H);ctx.strokeStyle='rgba(80,130,220,.30)';ctx.lineWidth=2;for(let y=60;y<H;y+=36){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+      ctx.strokeStyle='rgba(220,80,80,.45)';ctx.beginPath();ctx.moveTo(110,0);ctx.lineTo(110,H);ctx.stroke();blob('rgba(120,130,150,.25)',[[50,140,14],[50,300,14],[50,460,14]]);break;
+    case 'cake':rect('rgba(250,190,210,.18)',0,0,W,H);ctx.fillStyle='rgba(160,165,180,.30)';ctx.beginPath();ctx.ellipse(400,560,320,30,0,0,7);ctx.fill();
+      rect('rgba(205,150,100,.45)',140,445,520,115);rect('rgba(240,130,170,.55)',140,430,520,34);blob('rgba(240,130,170,.55)',[[180,468,14],[260,472,16],[350,466,12],[440,474,16],[530,467,13],[620,471,15]]);
+      ctx.strokeStyle='rgba(255,255,255,.6)';ctx.lineWidth=5;ctx.setLineDash([3,22]);ctx.beginPath();ctx.moveTo(160,510);ctx.lineTo(650,510);ctx.stroke();ctx.setLineDash([]);break;
+    case 'leaf':rect('rgba(150,210,140,.14)',0,0,W,H);ctx.fillStyle='rgba(80,175,85,.34)';ctx.beginPath();ctx.moveTo(40,380);ctx.bezierCurveTo(200,160,560,150,770,330);ctx.bezierCurveTo(560,520,220,540,40,380);ctx.fill();
+      ctx.strokeStyle='rgba(40,120,50,.35)';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(30,384);ctx.quadraticCurveTo(400,330,770,330);ctx.stroke();break;
+    case 'stairs':rect('rgba(240,205,160,.16)',0,0,W,H);ctx.fillStyle='rgba(180,125,75,.30)';ctx.beginPath();[[160,140],[280,140],[280,240],[400,240],[400,340],[520,340],[520,440],[640,440],[640,600],[160,600]].forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.fill();
+      rect('rgba(120,80,40,.18)',0,560,W,40);break;
+    case 'pizza':for(let x=0;x<W;x+=50)for(let y=0;y<H;y+=50)if((x+y)/50%2===0)rect('rgba(226,72,60,.13)',x,y,50,50);blob('rgba(170,175,190,.35)',[[400,300,240]]);blob('rgba(250,245,235,.5)',[[400,300,222]]);blob('rgba(242,194,48,.35)',[[400,300,195]]);break;
+  }
+}
+
+/* ---------- canvas helpers ---------- */
+const dpr=()=>Math.min(window.devicePixelRatio||1,2.5);
+function fit(cv){const r=cv.getBoundingClientRect();if(!r.width)return null;const w=Math.round(r.width*dpr()),h=Math.round(r.width*.75*dpr());if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}const ctx=cv.getContext('2d');const sc=w/W;ctx.setTransform(sc,0,0,sc,0,0);return ctx}
+function toLogical(cv,e){const r=cv.getBoundingClientRect();return [(e.clientX-r.left)*W/r.width,(e.clientY-r.top)*H/r.height]}
+function trace(ctx,p){ctx.beginPath();ctx.moveTo(p[0][0],p[0][1]);for(let i=1;i<p.length;i++)ctx.lineTo(p[i][0],p[i][1])}
+function paper(ctx,grid=true,bg){ctx.fillStyle=CV.paper;ctx.fillRect(0,0,W,H);scene(ctx,bg);if(!grid)return;ctx.fillStyle=CV.grid;for(let x=40;x<W;x+=40)for(let y=40;y<H;y+=40){ctx.beginPath();ctx.arc(x,y,2,0,7);ctx.fill()}}
+function ink(ctx,p,color,w){ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle=color;ctx.lineWidth=w;trace(ctx,p);ctx.stroke()}
+function arrowAt(ctx,p,i,color,size){i=Math.max(1,Math.min(p.length-2,i));const a=p[i-1],b=p[i+1],ang=Math.atan2(b[1]-a[1],b[0]-a[0]);ctx.save();ctx.translate(p[i][0],p[i][1]);ctx.rotate(ang);ctx.fillStyle=color;ctx.beginPath();ctx.moveTo(size,0);ctx.lineTo(-size*.7,size*.8);ctx.lineTo(-size*.7,-size*.8);ctx.closePath();ctx.fill();ctx.restore()}
+function renderThumb(cv,d){const ctx=fit(cv);if(!ctx)return;paper(ctx,false,d.bg);d.strokes.forEach(s=>ink(ctx,s.pts,s.color,16))}
+
+/* ---------- kid bar ---------- */
+function renderKids(){
+  const sel=$('kidSel');
+  sel.innerHTML=S.kids.length?S.kids.map(k=>`<option value="${k.id}"${k.id===S.active?' selected':''}>${esc(k.name)}</option>`).join(''):'<option value="">No child added</option>';
+}
+$('kidSel').onchange=e=>{S.active=e.target.value;save();refreshKid()};
+function refreshKid(){if(curTab==='progress')renderProgress();if(curTab==='practice'&&$('playView').hidden)renderCards()}
+$('addKidBtn').onclick=()=>{$('addKidRow').hidden=false;$('kidName').focus()};
+$('kidCancel').onclick=()=>{$('addKidRow').hidden=true;$('kidName').value=''};
+function addKid(){const n=$('kidName').value.trim();if(!n){$('kidName').focus();return}const k={id:uid('k_'),name:n,tol:'medium'};S.kids.push(k);S.active=k.id;save();renderKids();$('kidName').value='';$('addKidRow').hidden=true;refreshKid()}
+$('kidSave').onclick=addKid;$('kidName').onkeydown=e=>{if(e.key==='Enter')addKid()};
+
+/* ---------- tabs ---------- */
+let curTab='practice';
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+function showTab(t){
+  curTab=t;
+  document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t));
+  ['practice','create','progress'].forEach(n=>$('tab-'+n).hidden=n!==t);
+  if(t==='practice'){if(P&&!$('playView').hidden)startLoop();else renderCards()}
+  else stopLoop();
+  if(t==='create'){renderTools();drawMaker();renderMine()}
+  if(t==='progress')renderProgress();
+}
+
+/* ---------- practice ---------- */
+let P=null,live=null,failTrace=null,parts=[],raf=0;
+function renderModeSeg(){
+  const m=S.settings.mode;
+  $('modeSeg').querySelectorAll('button').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.m===m);b.onclick=()=>{S.settings.mode=b.dataset.m;save();renderModeSeg()}});
+  $('modeHint').textContent=m==='copy'?'The picture sits beside blank paper. Kids draw each part on their own, any size, anywhere.':'Kids trace dotted paths. Each line starts at the green dot and follows the arrow.';
+}
+/* a picture counts as finished when every line in one session was met */
+function doneSet(kidId,mode){
+  const by={},out=new Set();if(!kidId)return out;
+  S.attempts.forEach(a=>{if(a.kid===kidId&&(a.mode||'trace')===mode&&a.pass)(by[a.sid]=by[a.sid]||{d:a.d,n:0}).n++});
+  Object.values(by).forEach(x=>{const d=S.drawings.find(y=>y.id===x.d);if(d&&x.n>=d.strokes.length)out.add(x.d)});
+  return out;
+}
+/* a level is mastered after 2 different pictures in it are finished (or all, if it has fewer) */
+function levelInfo(mode){
+  const k=activeKid(),done=doneSet(k&&k.id,mode);
+  const info=LEVELS.map(L=>{const pics=byLevel().filter(d=>levelOf(d)===L.n),n=pics.filter(d=>done.has(d.id)).length;return {...L,pics,done:n,mastered:pics.length>0&&n>=Math.min(2,pics.length)}});
+  const nx=info.find(l=>l.pics.length&&!l.mastered);
+  return {info,next:nx?nx.n:null,done};
+}
+function curLevel(li){const k=activeKid(),v=k?k.lvl:S.settings.lvl;return v===undefined||v===null?(li.next||1):v}
+function setLevel(v){const k=activeKid();if(k)k.lvl=v;else S.settings.lvl=v;save()}
+const CRAYON=['#E2483C','#F08A24','#F2C230','#3FAE5A','#1FA0A8','#3B6FD8','#8A5BD6','#9A6338'];
+function levelButtons(li,sel){
+  return li.info.map(l=>`<button class="lv crayon${l.mastered?' mastered':''}" type="button" data-lv="${l.n}" aria-pressed="${sel===l.n}" style="--c:${CRAYON[l.n-1]}" aria-label="Level ${l.n}, ${esc(l.name)}${l.mastered?', mastered':''}, ${l.done} of ${l.pics.length} pictures finished">
+    ${li.next===l.n&&activeKid()?'<span class="tag">Up next</span>':''}
+    <span class="wrapper"><span class="num">${l.mastered?'★':l.n}</span><span class="lvtxt"><b>${esc(l.name)}</b><small>~age ${l.age}</small>
+    <span class="pips">${l.pics.map((_,i)=>`<i class="${i<l.done?'on':''}"></i>`).join('')}</span></span></span></button>`).join('');
+}
+function renderCards(){
+  renderModeSeg();
+  const mode=S.settings.mode==='copy'?'copy':'trace',li=levelInfo(mode),sel=curLevel(li);
+  $('levels').innerHTML=levelButtons(li,sel)+`<button class="lv allbtn" type="button" data-lv="all" aria-pressed="${sel==='all'}"><b>All pictures</b><small>${S.drawings.length} pictures, easiest first</small></button>`;
+  $('levels').querySelectorAll('.lv').forEach(b=>b.onclick=()=>{setLevel(b.dataset.lv==='all'?'all':+b.dataset.lv);renderCards()});
+  const L=LEVELS.find(l=>l.n===sel);
+  $('lvlHead').innerHTML=L?`<span class="lvkicker">Level ${L.n} of 8</span><h2>${esc(L.name)}</h2><p class="hint">${esc(L.how)} Most children copy this stroke around age ${L.age}.</p>`:`<h2>All pictures</h2><p class="hint">Every picture, sorted from easiest to hardest level.</p>`;
+  const list=sel==='all'?byLevel():byLevel().filter(d=>levelOf(d)===sel);
+  $('cards').innerHTML=list.map(d=>{
+    const types=[...new Set(d.strokes.map(s=>s.k==='cross'?'cross':s.k==='x'?'x':s.type))];
+    const nm={cross:'Cross',x:'X'};
+    return `<button class="card" type="button" data-d="${d.id}"><canvas></canvas><strong>${li.done.has(d.id)?'✓ ':''}${esc(d.name)}</strong><span class="meta">${sel==='all'?`<span class="chip lvchip">Level ${levelOf(d)}</span>`:''}${d.custom?'<span class="chip lvchip">Mine</span>':''}${types.map(t=>`<span class="chip">${glyph(t)}${esc(nm[t]||TYPES[t].split(' ')[0])}</span>`).join('')}</span><span class="note">${d.strokes.length} lines</span></button>`}).join('')||`<p class="empty">No pictures at this level yet. Make one in Create.</p>`;
+  $('cards').querySelectorAll('.card').forEach(c=>{renderThumb(c.querySelector('canvas'),S.drawings.find(d=>d.id===c.dataset.d));c.onclick=()=>openDrawing(c.dataset.d)});
+}
+function openDrawing(id){
+  const d=S.drawings.find(x=>x.id===id);if(!d)return;
+  const mode=S.settings.mode==='copy'?'copy':'trace';
+  P={d,mode,idx:0,sid:uid('s_'),done:false,kid:[],anchor:null};live=null;failTrace=null;parts=[];
+  $('pickView').style.display='none';$('playView').hidden=false;$('playView').style.display='flex';$('doneCard').hidden=true;
+  $('traceStage').hidden=mode==='copy';$('copyStage').hidden=mode!=='copy';
+  $('playTitle').textContent=d.name;renderDots();
+  const w=KIDWORD[d.strokes[0].type];
+  setTip(!activeKid()?`Add a child at the top to save progress.`:mode==='copy'?`Look at the picture. Draw the ${w} on your paper!`:`Start with the ${w}!`);
+  startLoop();
+}
+function closePlay(){stopLoop();P=null;$('playView').hidden=true;$('playView').style.display='none';$('pickView').style.display='flex';renderCards()}
+$('backBtn').onclick=closePlay;$('pickBtn').onclick=closePlay;
+function nextPic(d){const l=byLevel(),i=l.findIndex(x=>x.id===d.id);return i>=0?l[i+1]||null:null}
+$('nextBtn').onclick=()=>{if(!P)return;const n=nextPic(P.d);if(!n)return closePlay();const lv=levelOf(n);if(curLevel(levelInfo(P.mode))!=='all'&&lv!==levelOf(P.d))setLevel(lv);openDrawing(n.id)};
+$('restartBtn').onclick=()=>P&&openDrawing(P.d.id);$('againBtn').onclick=()=>P&&openDrawing(P.d.id);
+function renderDots(){$('dots').innerHTML=P.d.strokes.map((s,i)=>`<span class="${i===P.idx&&!P.done?'now':''}" style="${i<P.idx?`background:${s.color};border-color:${s.color}`:''}"></span>`).join('')}
+function setTip(t){$('tip').textContent=t}
+function startLoop(){if(!raf)raf=requestAnimationFrame(loop)}
+function stopLoop(){if(raf)cancelAnimationFrame(raf);raf=0}
+function loop(ts){(P&&P.mode==='copy'?drawCopy:drawPlay)(ts||0);raf=(P&&!$('playView').hidden)?requestAnimationFrame(loop):0}
+const tolNow=()=>TOL[(activeKid()||{}).tol||'medium'];
+
+function drawPlay(ts){
+  const cv=$('play'),ctx=fit(cv);if(!ctx||!P)return;
+  paper(ctx,true,P.d.bg);
+  const tol=tolNow();
+  P.d.strokes.forEach((s,i)=>{
+    if(i<P.idx)ink(ctx,s.pts,s.color,13);
+    else if(i>P.idx&&S.settings.ghost){ctx.setLineDash([2,14]);ink(ctx,s.pts,CV.ghost,5);ctx.setLineDash([])}
+  });
+  if(!P.done){
+    const s=P.d.strokes[P.idx];
+    ctx.globalAlpha=.16;ink(ctx,s.pts,s.color,tol*2);ctx.globalAlpha=1;
+    ctx.setLineDash([1,16]);ink(ctx,s.pts,s.color,8);ctx.setLineDash([]);
+    const n=s.pts.length;arrowAt(ctx,s.pts,Math.min(8,n-2),CV.go,13);if(n>34)arrowAt(ctx,s.pts,Math.round(n*.55),CV.go,13);
+    const pulse=reduced?0:Math.sin(ts/260)*3;
+    ctx.fillStyle=CV.go;ctx.beginPath();ctx.arc(s.pts[0][0],s.pts[0][1],19+pulse,0,7);ctx.fill();
+    ctx.fillStyle=CV.paper;ctx.beginPath();ctx.arc(s.pts[0][0],s.pts[0][1],7,0,7);ctx.fill();
+  }
+  if(failTrace){const a=1-(performance.now()-failTrace.t)/800;if(a<=0)failTrace=null;else{ctx.globalAlpha=a;ink(ctx,failTrace.pts,CV.warn,10);ctx.globalAlpha=1}}
+  if(live&&live.pts.length>1)ink(ctx,live.pts,CV.crayon,11);
+  drawParts(ctx);
+}
+function drawCopy(ts){
+  const m=fit($('model')),k=fit($('pad'));if(!m||!k||!P)return;
+  paper(m,false,P.d.bg);
+  P.d.strokes.forEach((s,i)=>{if(i===P.idx&&!P.done)return;m.globalAlpha=(i<P.idx||P.done)?1:.3;ink(m,s.pts,s.color,12);m.globalAlpha=1});
+  if(!P.done){
+    const s=P.d.strokes[P.idx],pulse=reduced?0:(Math.sin(ts/300)+1)*2.5;
+    ink(m,s.pts,s.color,15+pulse);
+    arrowAt(m,s.pts,Math.min(8,s.pts.length-2),CV.go,15);
+    m.fillStyle=CV.go;m.beginPath();m.arc(s.pts[0][0],s.pts[0][1],15,0,7);m.fill();
+    m.fillStyle=CV.paper;m.beginPath();m.arc(s.pts[0][0],s.pts[0][1],5,0,7);m.fill();
+  }
+  paper(k,true,P.d.bg);
+  P.kid.forEach(s=>ink(k,s.pts,s.color,11));
+  if(failTrace){const a=1-(performance.now()-failTrace.t)/800;if(a<=0)failTrace=null;else{k.globalAlpha=a;ink(k,failTrace.pts,CV.warn,10);k.globalAlpha=1}}
+  if(live&&live.pts.length>1)ink(k,live.pts,CV.crayon,11);
+  drawParts(k);
+}
+function drawParts(ctx){
+  parts=parts.filter(p=>p.life>0);
+  parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=p.g;p.life--;ctx.globalAlpha=Math.min(1,p.life/20);ctx.fillStyle=p.c;ctx.beginPath();if(p.star){star(ctx,p.x,p.y,p.r)}else{ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.life/8);ctx.fillRect(-p.r,-p.r/2,p.r*2,p.r);ctx.restore()}ctx.globalAlpha=1});
+}
+function star(ctx,x,y,r){ctx.beginPath();for(let i=0;i<10;i++){const a=i*Math.PI/5-Math.PI/2,rr=i%2?r*.45:r;ctx.lineTo(x+rr*Math.cos(a),y+rr*Math.sin(a))}ctx.closePath();ctx.fill()}
+function sparkle(x,y,c){if(reduced)return;for(let i=0;i<14;i++){const a=Math.random()*7,v=2+Math.random()*4;parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,g:.08,life:40+Math.random()*20,c,r:7+Math.random()*5,star:1})}}
+function confetti(){if(reduced)return;for(let i=0;i<110;i++)parts.push({x:Math.random()*W,y:-20-Math.random()*200,vx:(Math.random()-.5)*3,vy:2+Math.random()*3,g:.05,life:150+Math.random()*60,c:COLORS[i%COLORS.length],r:6+Math.random()*4})}
+
+function bindPad(cv){
+  cv.addEventListener('pointerdown',e=>{if(!P||P.done||live)return;e.preventDefault();cv.setPointerCapture(e.pointerId);live={id:e.pointerId,pts:[toLogical(cv,e)]};failTrace=null});
+  cv.addEventListener('pointermove',e=>{if(!live||e.pointerId!==live.id)return;const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];(evs.length?evs:[e]).forEach(ev=>live.pts.push(toLogical(cv,ev)))});
+  const end=e=>{if(!live||e.pointerId!==live.id)return;const pts=live.pts;live=null;finishStroke(pts)};
+  cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+}
+bindPad($('play'));bindPad($('pad'));
+
+const PRAISE=['Nice line!','You did it!','Great job!','Super smooth!','Wow!','Awesome!'];
+function advance(end,color){
+  sparkle(end[0],end[1],color);P.idx++;
+  if(P.idx>=P.d.strokes.length){P.done=true;renderDots();confetti();sound('win');setTip('');$('doneTitle').textContent=`You drew the ${P.d.name}!`;{const n=nextPic(P.d),nb=$('nextBtn');nb.hidden=!n;if(n)nb.textContent=levelOf(n)>levelOf(P.d)?`Next: Level ${levelOf(n)}!`:`Next: ${n.name}`}setTimeout(()=>{if(P&&P.done)$('doneCard').hidden=false},reduced?0:700)}
+  else{renderDots();sound('ok');setTip(`${PRAISE[Math.floor(Math.random()*PRAISE.length)]} Now the ${KIDWORD[P.d.strokes[P.idx].type]}.`)}
+}
+function finishCopy(pts){
+  if(pathLen(pts)<20){setTip('Draw a line on your paper!');return}
+  const s=P.d.strokes[P.idx],kid=activeKid(),r=copyScore(s,pts,(kid||{}).tol||'medium');
+  let place=null;
+  if(r.pass&&P.anchor){const a=P.anchor,tb=bbox(s.pts),cb=bbox(pts),ex=[(tb.cx-a.tc[0])*a.s+a.kc[0],(tb.cy-a.tc[1])*a.s+a.kc[1]];place=dist([cb.cx,cb.cy],ex)<=.5*Math.max(tb.size*a.s,90)}
+  if(kid){S.attempts.push({kid:kid.id,sid:P.sid,mode:'copy',d:P.d.id,type:s.type,t:Date.now(),score:r.score,err:r.err,start:r.start,dir:r.dir,pass:r.pass,place});save()}
+  if(r.pass){
+    if(!P.anchor){const tb=bbox(s.pts),cb=bbox(pts);P.anchor={tc:[tb.cx,tb.cy],kc:[cb.cx,cb.cy],s:Math.max(.3,Math.min(2.5,cb.size/(tb.size||1)))}}
+    P.kid.push({pts,color:s.color});advance(pts[pts.length-1],s.color);
+  }else{
+    failTrace={pts,t:performance.now()};sound('try');
+    setTip(`Almost! Look at the ${KIDWORD[s.type]} again and try once more.`);
+  }
+}
+function finishStroke(pts){
+  if(P.mode==='copy')return finishCopy(pts);
+  if(pathLen(pts)<18){setTip('Start on the green dot and draw!');return}
+  const s=P.d.strokes[P.idx],r=scoreStroke(s,pts,tolNow()),kid=activeKid();
+  if(kid){S.attempts.push({kid:kid.id,sid:P.sid,mode:'trace',d:P.d.id,type:s.type,t:Date.now(),score:r.score,cov:r.cov,acc:r.acc,start:r.start,dir:r.dir,pass:r.pass});save()}
+  if(r.pass){
+    advance(s.pts[s.pts.length-1],s.color);
+  }else{
+    failTrace={pts,t:performance.now()};sound('try');
+    setTip(!r.start?'Almost! Start on the green dot.':!r.dir?'Almost! Go the way the arrow points.':r.short?'Keep going all the way to the end!':s.closed&&r.cov<.75?'Go all the way around!':'Almost! Try to stay on the dots.');
+  }
+}
+let AC=null;
+function sound(kind){
+  if(!S.settings.sound)return;
+  try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();
+    const notes=kind==='ok'?[660,880]:kind==='win'?[523,659,784,1047]:[330,294];
+    notes.forEach((f,i)=>{const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+i*.11;o.type=kind==='try'?'sine':'triangle';o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(kind==='try'?.06:.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.3);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.32)});
+  }catch(e){}
+}
+
+/* ---------- create ---------- */
+const TOOLS=[['vertical','Down'],['horizontal','Across'],['circle','Circle'],['diagonal','Slant ↘'],['diagL','Slant ↙'],['cross','Cross'],['x','X'],['square','Square'],['triangle','Triangle'],['free','Freehand']];
+const M={strokes:[],tool:'circle',color:COLORS[2],drag:null,bg:'none'};
+function renderTools(){
+  $('tools').innerHTML=TOOLS.map(([k,l])=>`<button class="tool" type="button" data-tool="${k}" aria-pressed="${M.tool===k}">${glyph(k)}${l}</button>`).join('');
+  $('tools').querySelectorAll('.tool').forEach(b=>b.onclick=()=>{M.tool=b.dataset.tool;renderTools()});
+  $('swatches').innerHTML=COLORS.map(c=>`<button class="sw" type="button" style="background:${c}" aria-label="Color ${c}" aria-pressed="${M.color===c}" data-c="${c}"></button>`).join('');
+  $('swatches').querySelectorAll('.sw').forEach(b=>b.onclick=()=>{M.color=b.dataset.c;renderTools()});
+  $('bgs').innerHTML=SCENE_PICK.map(([k,l])=>`<button class="tool" type="button" data-bg="${k}" aria-pressed="${M.bg===k}">${l}</button>`).join('');
+  $('bgs').querySelectorAll('.tool').forEach(b=>b.onclick=()=>{M.bg=b.dataset.bg;renderTools();drawMaker()});
+}
+function buildShape(tool,A,B,raw){
+  const x1=Math.min(A[0],B[0]),x2=Math.max(A[0],B[0]),y1=Math.min(A[1],B[1]),y2=Math.max(A[1],B[1]),w=x2-x1,h=y2-y1,cx=(x1+x2)/2,cy=(y1+y2)/2,c=M.color;
+  switch(tool){
+    case 'vertical':return h<20?[]:[st('vertical',L(A[0],y1,A[0],y2),c)];
+    case 'horizontal':return w<20?[]:[st('horizontal',L(x1,A[1],x2,A[1]),c)];
+    case 'diagonal':return w+h<30?[]:[st('diagonal',L(x1,y1,x2,y2),c)];
+    case 'diagL':return w+h<30?[]:[st('diagonal',L(x2,y1,x1,y2),c)];
+    case 'circle':{const r=Math.max(w,h)/2;return r<15?[]:[st('circle',C(cx,cy,r),c,1)]}
+    case 'square':return w<20||h<20?[]:[st('square',R(x1,y1,w,h),c,1)];
+    case 'triangle':return w<20||h<20?[]:[st('triangle',T(x1,y1,w,h),c,1)];
+    case 'cross':return w<20||h<20?[]:[st('vertical',L(cx,y1,cx,y2),c,0,'cross'),st('horizontal',L(x1,cy,x2,cy),c,0,'cross')];
+    case 'x':return w<20||h<20?[]:[st('diagonal',L(x1,y1,x2,y2),c,0,'x'),st('diagonal',L(x2,y1,x1,y2),c,0,'x')];
+    case 'free':{if(!raw||pathLen(raw)<30)return[];const p=resample(raw,8);return [st('free',p,c,dist(p[0],p[p.length-1])<30)]}
+  }
+  return [];
+}
+function drawMaker(){
+  const ctx=fit($('maker'));if(!ctx)return;paper(ctx,true,M.bg==='none'?null:M.bg);
+  const all=[...M.strokes];
+  all.forEach(s=>ink(ctx,s.pts,s.color,11));
+  if(M.drag){const pv=buildShape(M.tool,M.drag.a,M.drag.b,M.drag.raw);ctx.setLineDash([10,10]);pv.forEach(s=>ink(ctx,s.pts,s.color,6));ctx.setLineDash([]);if(M.tool==='free'&&M.drag.raw.length>1)ink(ctx,M.drag.raw,M.color,6)}
+  M.strokes.forEach((s,i)=>{const p=s.pts[0];if(s.pts.length>3)arrowAt(ctx,s.pts,Math.min(6,s.pts.length-2),CV.go,10);ctx.fillStyle=CV.ink;ctx.beginPath();ctx.arc(p[0],p[1],14,0,7);ctx.fill();ctx.fillStyle=CV.paper;ctx.font='700 16px Andika, system-ui, sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(i+1,p[0],p[1]+1)});
+  {const lv=M.strokes.length?levelOf({strokes:M.strokes}):0,Lv=LEVELS[lv-1];$('makerLvl').textContent=Lv?`This picture is Level ${lv} · ${Lv.name}`:''}
+  if(!M.strokes.length&&!M.drag){ctx.fillStyle=CV.ghost;ctx.font='700 28px Gluten, system-ui, sans-serif';ctx.textAlign='center';ctx.fillText('Pick a stroke above, then drag here',W/2,H/2)}
+}
+const cvM=$('maker');cvM.style.touchAction='none';
+cvM.addEventListener('pointerdown',e=>{e.preventDefault();cvM.setPointerCapture(e.pointerId);const p=toLogical(cvM,e);M.drag={id:e.pointerId,a:p,b:p,raw:[p]};drawMaker()});
+cvM.addEventListener('pointermove',e=>{if(!M.drag||M.drag.id!==e.pointerId)return;const p=toLogical(cvM,e);M.drag.b=p;M.drag.raw.push(p);drawMaker()});
+const endM=e=>{if(!M.drag||M.drag.id!==e.pointerId)return;const s=buildShape(M.tool,M.drag.a,M.drag.b,M.drag.raw);M.drag=null;M.strokes.push(...s);$('saveMsg').textContent='';drawMaker()};
+cvM.addEventListener('pointerup',endM);cvM.addEventListener('pointercancel',endM);
+$('undoBtn').onclick=()=>{M.strokes.pop();drawMaker()};
+$('clearBtn').onclick=()=>{M.strokes=[];drawMaker()};
+$('saveBtn').onclick=()=>{
+  const n=$('drawName').value.trim();
+  if(!M.strokes.length){$('saveMsg').textContent='Add at least one stroke first.';return}
+  if(!n){$('saveMsg').textContent='Give the picture a name first.';$('drawName').focus();return}
+  const lv=levelOf({strokes:M.strokes});
+  const dn={id:uid('d_'),name:n,strokes:M.strokes,custom:1};if(M.bg!=='none')dn.bg=M.bg;S.drawings.push(dn);save();
+  M.strokes=[];$('drawName').value='';drawMaker();renderMine();
+  $('saveMsg').textContent=`Saved “${n}”. It's in Practice under Level ${lv} · ${LEVELS[lv-1].name}.`;
+};
+function renderMine(){
+  const list=byLevel();
+  $('mineList').innerHTML=list.map(d=>`<li><canvas></canvas><span class="nm">${esc(d.name)} <span class="note">· Level ${levelOf(d)} · ${d.strokes.length} lines${d.custom?'':' · starter'}</span></span><button class="btn ghost" type="button" data-del="${d.id}">Delete</button></li>`).join('');
+  $('mineList').querySelectorAll('li').forEach((li,i)=>renderThumb(li.querySelector('canvas'),list[i]));
+  $('mineList').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>armed(b,'Tap again to delete',()=>{S.drawings=S.drawings.filter(d=>d.id!==b.dataset.del);save();renderMine()}));
+}
+function armed(btn,label,fn){
+  if(btn.dataset.armed){fn();return}
+  const old=btn.textContent;btn.dataset.armed='1';btn.textContent=label;btn.classList.add('danger-armed');
+  setTimeout(()=>{if(btn.isConnected){delete btn.dataset.armed;btn.textContent=old;btn.classList.remove('danger-armed')}},3000);
+}
+
+/* ---------- progress ---------- */
+const pct=(a,f)=>a.length?Math.round(100*a.filter(f).length/a.length):0;
+const avg=a=>a.length?Math.round(a.reduce((s,x)=>s+x,0)/a.length):0;
+const fmtDay=t=>new Date(t).toLocaleDateString(undefined,{month:'short',day:'numeric'});
+const dayKey=t=>new Date(t).toDateString();
+function spark(list){
+  const days=[];list.forEach(a=>{const k=dayKey(a.t);let d=days.find(x=>x.k===k);if(!d)days.push(d={k,s:[]});d.s.push(a.score)});
+  const v=days.map(d=>avg(d.s)),w=200,h=44,y=s=>40-s/100*36;
+  if(!v.length)return '';
+  const x=i=>v.length===1?w/2:6+i*(w-12)/(v.length-1);
+  const pts=v.map((s,i)=>`${x(i).toFixed(1)},${y(s).toFixed(1)}`).join(' ');
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" role="img" aria-label="Daily average score: ${v.join(', ')}">
+    <line x1="0" x2="${w}" y1="${y(70)}" y2="${y(70)}" stroke="var(--line)" stroke-dasharray="3 4"/>
+    ${v.length>1?`<polygon points="${x(0)},40 ${pts} ${x(v.length-1)},40" fill="var(--accent)" opacity=".14"/><polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`:''}
+    <circle cx="${x(v.length-1)}" cy="${y(v[v.length-1])}" r="4.5" fill="var(--accent)"/></svg>`;
+}
+function typeStats(list){
+  const first=avg(list.slice(0,5).map(a=>a.score)),last=avg(list.slice(-5).map(a=>a.score));
+  const pl=list.filter(a=>a.place===true||a.place===false);
+  return {n:list.length,met:pct(list,a=>a.pass),first,last,delta:list.length>=6?last-first:null,start:pct(list,a=>a.start),dir:pct(list,a=>a.dir),place:pl.length?pct(pl,a=>a.place):null};
+}
+function renderProgress(){
+  const el=$('tab-progress'),kid=activeKid();
+  if(!kid){el.innerHTML='<div class="panel empty">Add a child at the top to start tracking.</div>';return}
+  const pm=S.settings.pmode==='copy'?'copy':'trace';
+  const A=S.attempts.filter(a=>a.kid===kid.id&&(a.mode||'trace')===pm).sort((a,b)=>a.t-b.t);
+  const types=ORDER.filter(t=>A.some(a=>a.type===t));
+  const sess={};A.forEach(a=>{(sess[a.sid]=sess[a.sid]||[]).push(a)});
+  const sessions=Object.values(sess).sort((a,b)=>b[0].t-a[0].t).slice(0,10);
+  const dname=id=>(S.drawings.find(d=>d.id===id)||{name:'Deleted picture'}).name;
+  const LI=levelInfo(pm);
+  el.innerHTML=`
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h2>${esc(kid.name)}</h2>
+      <div class="seg" id="pmSeg" role="group" aria-label="Show results for">${[['trace','Tracing'],['copy','Copying']].map(([m,l])=>`<button type="button" data-m="${m}" aria-pressed="${pm===m}">${l}</button>`).join('')}</div></div>
+    <div class="settings">
+      <div><span class="label">Line forgiveness</span>
+        <div class="seg" id="tolSeg">${['easy','medium','tricky'].map(t=>`<button type="button" data-t="${t}" aria-pressed="${kid.tol===t}">${t[0].toUpperCase()+t.slice(1)}</button>`).join('')}</div>
+        <span class="note">How far from the path still counts.</span></div>
+      <label class="toggle"><input type="checkbox" id="optSound" ${S.settings.sound?'checked':''}> Sounds</label>
+      <label class="toggle"><input type="checkbox" id="optGhost" ${S.settings.ghost?'checked':''}> Show the whole picture faintly</label>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Levels</h3>
+    <div class="levels" id="pLevels">${levelButtons(LI,null)}</div>
+    <p class="note" style="margin:0">A level counts as mastered (★) after the child finishes 2 different pictures in it while ${pm==='copy'?'copying':'tracing'}. Tap a level to practice it.</p>
+  </div>
+  ${kid.ex?`<div class="banner"><p><strong>This is example data</strong> so you can see how tracking looks. Add a real child at the top, then remove this one.</p><button class="btn" type="button" id="rmEx">Remove example child</button></div>`:''}
+  <div class="panel">
+    <h3>By stroke</h3>
+    ${types.length?`<div class="strokes">${types.map(t=>{const s=typeStats(A.filter(a=>a.type===t));
+      return `<div class="srow"><div class="sname">${glyph(t)}<div>${TYPES[t]}<small>${s.n} tries</small></div></div>
+      <div>${spark(A.filter(a=>a.type===t))}</div>
+      <div class="stats">
+        <div class="stat"><b>${s.last}${s.delta!==null?`<span class="delta ${s.delta>=0?'up':'down'}">${s.delta>=0?'+':''}${s.delta}</span>`:''}</b><span>Recent score</span></div>
+        <div class="stat"><b>${s.met}%</b><span>Met</span></div>
+        <div class="stat"><b>${s.start}%</b><span>Right start</span></div>
+        <div class="stat"><b>${s.dir}%</b><span>Right way</span></div>
+        ${pm==='copy'?`<div class="stat"><b>${s.place===null?'–':s.place+'%'}</b><span>Right spot</span></div>`:''}
+      </div></div>`}).join('')}</div>
+      <p class="note" style="margin:0">${pm==='copy'?'Copy score mostly measures how closely the shape matches the picture (size and position don’t count against it), plus start point and direction. Right spot checks whether each part landed in the right place relative to the first part.':'Score blends staying on the path, finishing the stroke, the start point and direction.'} Scores run 0–100; the dashed line marks 70. Recent score averages the last 5 tries; the chip compares it with the first 5.</p>`
+      :`<p class="empty">No ${pm==='copy'?'copying':'tracing'} practice yet. Pick a picture in Practice.</p>`}
+  </div>
+  ${sessions.length?`<div class="panel"><h3>Recent sessions</h3><div class="tablewrap"><table>
+    <thead><tr><th>Date</th><th>Picture</th><th>Lines met</th><th>Tries</th><th>First-try</th><th>Avg score</th></tr></thead>
+    <tbody>${sessions.map(s=>{const strokesMet=s.filter(a=>a.pass).length;const groups={};s.forEach(a=>{});
+      let first=0,cnt=0;let prevPass=true;s.forEach(a=>{if(prevPass){cnt++;if(a.pass)first++}prevPass=a.pass});
+      return `<tr><td>${fmtDay(s[0].t)}</td><td>${esc(dname(s[0].d))}</td><td>${strokesMet}</td><td>${s.length}</td><td>${cnt?Math.round(100*first/cnt):0}%</td><td>${avg(s.map(a=>a.score))}</td></tr>`}).join('')}</tbody></table></div></div>`:''}
+  <div class="panel">
+    <h3>Notes summary</h3>
+    <p class="note" style="margin:0">Copy a plain-text summary to paste into a session note.</p>
+    <div class="row" style="justify-content:flex-start"><button class="btn primary" type="button" id="copyBtn"${A.length?'':' disabled'}>Copy summary</button>
+    <button class="btn ghost" type="button" id="wipeBtn"${A.length?'':' disabled'}>Clear practice history</button>
+    <button class="btn ghost" type="button" id="rmKid">Remove child</button></div>
+    <textarea id="copyBox" hidden readonly aria-label="Summary text"></textarea>
+    <span class="note" id="copyMsg" aria-live="polite"></span>
+  </div>`;
+  el.querySelectorAll('#pLevels .lv').forEach(b=>b.onclick=()=>{setLevel(+b.dataset.lv);S.settings.mode=pm;save();showTab('practice')});
+  el.querySelectorAll('#pmSeg button').forEach(b=>b.onclick=()=>{S.settings.pmode=b.dataset.m;save();renderProgress()});
+  el.querySelectorAll('#tolSeg button').forEach(b=>b.onclick=()=>{kid.tol=b.dataset.t;save();renderProgress()});
+  $('optSound').onchange=e=>{S.settings.sound=e.target.checked;save()};
+  $('optGhost').onchange=e=>{S.settings.ghost=e.target.checked;save()};
+  const rmEx=$('rmEx');if(rmEx)rmEx.onclick=()=>armed(rmEx,'Tap again to remove',()=>removeKid(kid.id));
+  $('rmKid').onclick=e=>armed(e.currentTarget,'Tap again to remove',()=>removeKid(kid.id));
+  $('wipeBtn').onclick=e=>armed(e.currentTarget,'Tap again to clear',()=>{S.attempts=S.attempts.filter(a=>a.kid!==kid.id);save();renderProgress()});
+  $('copyBtn').onclick=()=>{
+    const txt=summaryText(kid,A,types,LI);
+    const show=()=>{const b=$('copyBox');b.hidden=false;b.value=txt;b.focus();b.select();$('copyMsg').textContent='Select all and copy the text above.'};
+    try{navigator.clipboard.writeText(txt).then(()=>{$('copyMsg').textContent='Copied.'},show)}catch(e){show()}
+  };
+}
+function summaryText(kid,A,types,LI){
+  const cp=S.settings.pmode==='copy';
+  const lines=[`Prewriting ${cp?'copying (from a visual model)':'tracing'} practice (Scribble Sprouts): ${kid.name}, ${fmtDay(A[0].t)} to ${fmtDay(A[A.length-1].t)}, ${new Set(A.map(a=>a.sid)).size} sessions, line forgiveness: ${kid.tol}.`];
+  {const m=LI.info.filter(l=>l.mastered),nx=LI.info.find(l=>l.n===LI.next);
+    lines.push(`Prewriting stroke level (developmental sequence): ${m.length?`mastered ${m.map(l=>`Level ${l.n} ${l.name.toLowerCase()}`).join(', ')}`:'no levels mastered yet'}${nx?`; working on Level ${nx.n} ${nx.name.toLowerCase()}`:''}.`)}
+  types.forEach(t=>{const s=typeStats(A.filter(a=>a.type===t));
+    lines.push(`${TYPES[t]}: ${s.n} attempts; met criteria ${s.met}% of attempts; recent avg score ${s.last}/100${s.delta!==null?` (first 5 attempts avg ${s.first})`:''}; correct start point ${s.start}%; correct direction ${s.dir}%${cp&&s.place!==null?`; placed correctly in the picture ${s.place}%`:''}.`)});
+  return lines.join('\n');
+}
+function removeKid(id){S.kids=S.kids.filter(k=>k.id!==id);S.attempts=S.attempts.filter(a=>a.kid!==id);S.active=S.kids[0]?S.kids[0].id:'';save();renderKids();refreshKid()}
+
+/* ---------- feedback + install tip ---------- */
+const FEEDBACK_URL=''; /* paste the Google Form link here to show the Send feedback button */
+if(FEEDBACK_URL){$('feedbackBtn').href=FEEDBACK_URL;$('feedbackBtn').hidden=false}
+(function(){
+  let top=true;try{top=window.top===window.self}catch(e){top=false}
+  const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  const touch=/iPad|iPhone|Android/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  let seen=false;try{seen=!!localStorage.getItem('ss-install-tip')}catch(e){}
+  if(top&&!standalone&&touch&&!seen)$('installTip').hidden=false;
+  $('installX').onclick=()=>{$('installTip').hidden=true;try{localStorage.setItem('ss-install-tip','1')}catch(e){}};
+})();
+
+/* ---------- boot ---------- */
+(function(){try{const n=150,c=document.createElement('canvas');c.width=c.height=n;const x=c.getContext('2d'),d=x.createImageData(n,n);
+  for(let i=0;i<d.data.length;i+=4){const v=Math.random()<.5?255:0;d.data[i]=d.data[i+1]=d.data[i+2]=v;d.data[i+3]=Math.random()*16}
+  x.putImageData(d,0,0);x.globalAlpha=.07;x.lineWidth=1;for(let k=0;k<14;k++){x.strokeStyle=k%2?'#fff':'#000';x.beginPath();const a=Math.random()*n,b=Math.random()*n;x.moveTo(a,b);x.quadraticCurveTo(a+Math.random()*30-15,b+Math.random()*30-15,a+Math.random()*40-20,b+Math.random()*40-20);x.stroke()}
+  document.body.style.backgroundImage=`url(${c.toDataURL()})`}catch(e){}})();
+function redrawAll(){if(curTab==='practice'&&$('playView').hidden)renderCards();if(curTab==='create'){drawMaker();renderMine()}}
+let rt;new ResizeObserver(()=>{clearTimeout(rt);rt=setTimeout(redrawAll,80)}).observe(document.body);
+renderKids();renderCards();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(curTab==='create')drawMaker()});
+})();
+</script>
+
+<script>if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));</script>
+</body></html>
