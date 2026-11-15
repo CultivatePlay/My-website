@@ -26,10 +26,11 @@ function CPFaq() {
   );
 }
 
-function CPFooter({ onBook }) {
+function CPFooter({ onBook, footerOnly }) {
   const { Button } = NSf;
   return (
     <>
+      {!footerOnly && <>
       <section id="contact" style={{ background: "var(--surface-page)", borderTop: "1px solid var(--ink-100)" }}>
         <div className="cp-section-pad" style={{ maxWidth: "var(--container-lg)", margin: "0 auto", padding: "var(--space-24) var(--space-6)" }}>
           <div>
@@ -76,6 +77,7 @@ function CPFooter({ onBook }) {
           </div>
         </div>
       </section>
+      </>}
       <footer style={{ background: "var(--ink-900)", color: "rgba(255,255,255,.7)" }}>
         <div className="cp-footer-inner" style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-12) var(--space-6)",
           display: "flex", justifyContent: "space-between", alignItems: "center", gap: "var(--space-6)", flexWrap: "wrap" }}>
@@ -91,6 +93,7 @@ function CPFooter({ onBook }) {
             <a href="/resources/" style={{ color: "rgba(255,255,255,.7)" }}>Resources</a>
             <a href="/#team" style={{ color: "rgba(255,255,255,.7)" }}>Team</a>
             <a href="/#faq" style={{ color: "rgba(255,255,255,.7)" }}>FAQ</a>
+            <a href="/join-our-team/" style={{ color: "rgba(255,255,255,.7)" }}>Join our team</a>
           </div>
           <p style={{ margin: 0, fontSize: "var(--text-xs)" }}>© 2026 Cultivate Play Pediatric Therapy</p>
         </div>

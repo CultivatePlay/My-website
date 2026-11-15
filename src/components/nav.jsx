@@ -3,7 +3,7 @@ const { useState } = React;
 const NS = window.CultivatePlayDesignSystem_d72bbd;
 const CALENDLY = "https://calendly.com/alyssaengel-cultivate-play/30min";
 
-function CPNav({ onBook }) {
+function CPNav({ onBook, contactHref }) {
   const { Button } = NS;
   const [open, setOpen] = useState(false);
   const links = [
@@ -13,7 +13,7 @@ function CPNav({ onBook }) {
     { label: "Resources", href: "/resources/" },
     { label: "Team", href: "/#team" },
     { label: "FAQ", href: "/#faq" },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: contactHref || "#contact" },
   ];
   const closeMenu = () => setOpen(false);
   return (

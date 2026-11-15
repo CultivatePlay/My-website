@@ -91,16 +91,17 @@
   }
 
   // Mounts a page inside the site nav and footer; faq feeds the FAQ structured data.
-  function render(Page, faq) {
+  // opts.footerOnly drops the contact and consultation sections above the footer.
+  function render(Page, faq, opts) {
     if (faq) window.__pageFaq = faq;
     function Site() {
       const [book, setBook] = React.useState(false);
       const open = () => setBook(true);
       return (
         <React.Fragment>
-          <window.CPNav onBook={open} />
+          <window.CPNav onBook={open} contactHref={opts && opts.footerOnly ? "/#contact" : undefined} />
           <main><Page /></main>
-          <window.CPFooter onBook={open} />
+          <window.CPFooter onBook={open} footerOnly={!!(opts && opts.footerOnly)} />
           <window.CPBooking open={book} onClose={() => setBook(false)} />
         </React.Fragment>
       );
