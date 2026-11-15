@@ -8,6 +8,7 @@ Website for Cultivate Play Pediatric Therapy, served by GitHub Pages.
 - `/occupational-therapy/` → `occupational-therapy/index.html` (built from `src/pages/occupational-therapy.html`)
 - `/training/` → `training/index.html` (built from `src/pages/training.html`)
 - `/resources/` → `resources/index.html` (built from `src/pages/resources.html`; edit the lists in `src/components/resources-page.jsx`)
+- `/team/` → `team/index.html` (built from `src/pages/team.html`; bios in `src/components/team.jsx`)
 - `/join-our-team/` → `join-our-team/index.html` (built from `src/pages/join-our-team.html`; page text in `src/components/join-page.jsx`)
 
 ## Editing

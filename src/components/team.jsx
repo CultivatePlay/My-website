@@ -1,27 +1,30 @@
-// Cultivate Play — team + values. Exposes window.CPTeam, window.CPTestimonials.
+// Cultivate Play — team + values. Exposes window.CPPeople, window.CPTeam, window.CPTestimonials, window.CPReviews.
 const NSt = window.CultivatePlayDesignSystem_d72bbd;
+
+// Team members, shared by the homepage Team section and the /team/ page.
+const CPPeople = [
+  {
+    name: "Alyssa Engel",
+    title: "OTD, OTR/L, DIR-Proficient",
+    role: "Owner & Occupational Therapist · DIR-Proficient",
+    tint: "mint",
+    photo: (window.__resources && window.__resources.alyssaPhoto) || "assets/alyssa-engel.jpg",
+    bio: "Alyssa started Cultivate Play, PLLC in 2024 in response to a lack of neurodiversity-affirming providers in the Middle Tennessee area. She earned a B.S. in Exercise Science and her Occupational Therapy Doctorate (OTD) from the University of Tennessee, Chattanooga. She has experience across a variety of pediatric populations and specializes in neurodiversity-affirming, strengths-based care, including Autism, ADHD, and PDA (Persistent Drive for Autonomy). Alyssa is also neurodivergent (an ADHDer), so she understands first-hand many of the experiences of neurodivergent children and their families. A certified DIR Floortime provider, she is passionate about home and community-based care that supports authentic, meaningful participation. She lives in Murfreesboro and enjoys crafting, the outdoors, and traveling.",
+  },
+  {
+    name: "Valerie Navis",
+    title: "COTA/L",
+    role: "Certified Occupational Therapy Assistant",
+    tint: "lavender",
+    photo: (window.__resources && window.__resources.valeriePhoto) || "assets/valerie-navis.jpg",
+    bio: "Valerie is passionate about helping children grow through play. She believes the best therapy happens when children feel seen, heard, and excited to play. She uses a child-led, play-based approach to meet each child where they are, turning their interests into opportunities for growth. Her goal is to create a supportive, fun environment where kids can build skills, confidence, and independence, and be themselves.",
+  },
+];
 
 function CPTeam() {
   const { Button } = NSt;
   const { CPEyebrow } = window;
-  const people = [
-    {
-      name: "Alyssa Engel",
-      title: "OTD, OTR/L, DIR-Proficient",
-      role: "Owner & Occupational Therapist · DIR-Proficient",
-      tint: "mint",
-      photo: (window.__resources && window.__resources.alyssaPhoto) || "assets/alyssa-engel.jpg",
-      bio: "Alyssa started Cultivate Play, PLLC in 2024 in response to a lack of neurodiversity-affirming providers in the Middle Tennessee area. She earned a B.S. in Exercise Science and her Occupational Therapy Doctorate (OTD) from the University of Tennessee, Chattanooga. She has experience across a variety of pediatric populations and specializes in neurodiversity-affirming, strengths-based care, including Autism, ADHD, and PDA (Persistent Drive for Autonomy). Alyssa is also neurodivergent (an ADHDer), so she understands first-hand many of the experiences of neurodivergent children and their families. A certified DIR Floortime provider, she is passionate about home and community-based care that supports authentic, meaningful participation. She lives in Murfreesboro and enjoys crafting, the outdoors, and traveling.",
-    },
-    {
-      name: "Valerie Navis",
-      title: "COTA/L",
-      role: "Certified Occupational Therapy Assistant",
-      tint: "lavender",
-      photo: (window.__resources && window.__resources.valeriePhoto) || "assets/valerie-navis.jpg",
-      bio: "Valerie is passionate about helping children grow through play. She believes the best therapy happens when children feel seen, heard, and excited to play. She uses a child-led, play-based approach to meet each child where they are, turning their interests into opportunities for growth. Her goal is to create a supportive, fun environment where kids can build skills, confidence, and independence, and be themselves.",
-    },
-  ];
+  const people = CPPeople;
   return (
     <section id="team" style={{ background: "var(--surface-page)" }}>
       <div className="cp-section-pad" style={{ maxWidth: "var(--container-lg)", margin: "0 auto", padding: "var(--space-24) var(--space-6)" }}>
@@ -150,4 +153,4 @@ function CPReviews() {
   );
 }
 
-Object.assign(window, { CPTeam, CPTestimonials, CPReviews });
+Object.assign(window, { CPPeople, CPTeam, CPTestimonials, CPReviews });

@@ -91,7 +91,7 @@ function CPFooter({ onBook, footerOnly }) {
             <a href="/floortime/" style={{ color: "rgba(255,255,255,.7)" }}>DIR Floortime</a>
             <a href="/training/" style={{ color: "rgba(255,255,255,.7)" }}>Training</a>
             <a href="/resources/" style={{ color: "rgba(255,255,255,.7)" }}>Resources</a>
-            <a href="/#team" style={{ color: "rgba(255,255,255,.7)" }}>Team</a>
+            <a href="/team/" style={{ color: "rgba(255,255,255,.7)" }}>Team</a>
             <a href="/#faq" style={{ color: "rgba(255,255,255,.7)" }}>FAQ</a>
             <a href="/join-our-team/" style={{ color: "rgba(255,255,255,.7)" }}>Join our team</a>
           </div>
