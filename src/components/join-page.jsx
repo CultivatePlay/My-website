@@ -13,7 +13,7 @@
   ];
 
   const glance = [
-    { t: "Schedule", d: "Part-time maternity leave coverage from April 2027. You can build your own caseload up to full time during the coverage, then stay on full or part time." },
+    { t: "Schedule", d: "Start as soon as you're ready. Ramp up your caseload at your own pace, help cover a maternity leave along the way, and grow to full time if you'd like." },
     { t: "Pay", d: "Hourly, with paid documentation and admin time, paid cancellations, and mileage reimbursement" },
     { t: "Where", d: "Homes, preschools, the community, and our Murfreesboro office, mostly within Rutherford County" },
     { t: "DIR Floortime", d: "Training and certification required. Not certified yet? We'll pay for it." },
@@ -39,7 +39,7 @@
     { t: "Mentorship", d: "Ongoing support and guidance from an experienced, DIR-Proficient OT." },
   ];
 
-  const stats = [["Apr 2027", "Start date"], ["Flexible", "Set your own hours"], ["DIR", "Paid Floortime training"]];
+  const stats = [["ASAP", "Start date"], ["Flexible", "Set your own hours"], ["DIR", "Paid Floortime training"]];
 
   function JoinHero() {
     const { Button, LeafSprig = Noop, Flower = Noop, Blob = Noop } = NS;
@@ -108,10 +108,10 @@
                   participation in everyday life.
                 </p>
                 <p style={{ fontSize: "var(--text-lg)", color: "var(--ink-600)", lineHeight: 1.6, margin: 0 }}>
-                  This position begins in <strong style={{ color: "var(--ink-800)" }}>April 2027</strong> as part-time
-                  maternity leave coverage. If you'd like more hours, you can grow your own caseload up to full time while
-                  you're covering. We'd love for the right person to stay on afterward with their own caseload, full time
-                  or part time.
+                  We're hiring <strong style={{ color: "var(--ink-800)" }}>now</strong>, and you can start as soon as
+                  you're ready. You'll ramp up your caseload at your own pace, part time or up to full time, and help cover
+                  a maternity leave along the way. We'd love for the right person to stay on long term with their own
+                  caseload, full time or part time.
                 </p>
               </div>
               <div>

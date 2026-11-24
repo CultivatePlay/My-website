@@ -10,7 +10,7 @@
         <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-4) var(--space-6)", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "var(--space-3) var(--space-5)", textAlign: "center" }}>
           <p style={{ margin: 0, fontSize: "var(--text-base)", color: "var(--ink-700)", lineHeight: 1.5 }}>
             <strong style={{ fontFamily: "var(--font-display)", color: "var(--green-700)", fontSize: "var(--text-lg)" }}>We're hiring!</strong>{" "}
-            Looking for a neurodiversity-affirming pediatric OT to join us, starting April 2027.
+            Looking for a neurodiversity-affirming pediatric OT to join us as soon as possible.
           </p>
           <Button variant="primary" size="sm" as="a" href="/join-our-team/">Join the team</Button>
         </div>
