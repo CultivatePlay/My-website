@@ -41,7 +41,7 @@ function CPTeam() {
         <div style={{ margin: "var(--space-12) auto 0", maxWidth: 720, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "var(--space-4)", background: "var(--mint-100)", border: "1.5px solid var(--green-200)", borderRadius: "var(--radius-xl)", padding: "var(--space-5) var(--space-6)" }}>
           <div style={{ minWidth: 0 }}>
             <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "var(--text-lg)", color: "var(--green-700)" }}>We're hiring!</div>
-            <p style={{ fontSize: "var(--text-sm)", color: "var(--ink-600)", lineHeight: 1.55, margin: "4px 0 0" }}>Looking for a neurodiversity-affirming pediatric OT to join us as soon as possible.</p>
+            <p style={{ fontSize: "var(--text-sm)", color: "var(--ink-600)", lineHeight: 1.55, margin: "4px 0 0" }}>Looking for a neurodiversity-affirming pediatric OT to join our team.</p>
           </div>
           <Button variant="primary" as="a" href="/join-our-team/">Join our team</Button>
         </div>

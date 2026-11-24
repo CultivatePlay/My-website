@@ -13,7 +13,7 @@
   ];
 
   const glance = [
-    { t: "Schedule", d: "Start as soon as you're ready. Ramp up your caseload at your own pace, help cover a maternity leave along the way, and grow to full time if you'd like." },
+    { t: "Schedule", d: "Ramp up your caseload at your own pace, help cover a maternity leave along the way, and grow to full time if you'd like." },
     { t: "Pay", d: "Hourly, with paid documentation and admin time, paid cancellations, and mileage reimbursement" },
     { t: "Where", d: "Homes, preschools, the community, and our Murfreesboro office, mostly within Rutherford County" },
     { t: "DIR Floortime", d: "Training and certification required. Not certified yet? We'll pay for it." },
@@ -39,7 +39,7 @@
     { t: "Mentorship", d: "Ongoing support and guidance from an experienced, DIR-Proficient OT." },
   ];
 
-  const stats = [["ASAP", "Start date"], ["Flexible", "Set your own hours"], ["DIR", "Paid Floortime training"]];
+  const stats = [["Your pace", "Ramp up your caseload"], ["Flexible", "Set your own hours"], ["DIR", "Paid Floortime training"]];
 
   function JoinHero() {
     const { Button, LeafSprig = Noop, Flower = Noop, Blob = Noop } = NS;
@@ -55,7 +55,7 @@
           </nav>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--lavender-100)", color: "var(--lavender-700)", fontWeight: 700, fontSize: "var(--text-sm)", padding: "7px 14px", borderRadius: "var(--radius-pill)", marginBottom: "var(--space-5)" }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 4 13c0-5 3-9 9-11 0 6-1 9-2 11"/><path d="M11 20c0-4 2-8 6-10"/></svg>
-            Now hiring · Pediatric occupational therapist
+            Open position · Pediatric occupational therapist
           </span>
           <h1 style={{ fontSize: "var(--text-5xl)", lineHeight: 1.08, margin: "0 0 var(--space-3)" }}>Grow with us at Cultivate Play</h1>
           <p className="cp-hero-sub" style={{ fontSize: "var(--text-lg)", color: "var(--ink-600)", maxWidth: 600, margin: "var(--space-6) auto var(--space-8)", lineHeight: 1.6 }}>
@@ -108,9 +108,8 @@
                   participation in everyday life.
                 </p>
                 <p style={{ fontSize: "var(--text-lg)", color: "var(--ink-600)", lineHeight: 1.6, margin: 0 }}>
-                  We're hiring <strong style={{ color: "var(--ink-800)" }}>now</strong>, and you can start as soon as
-                  you're ready. You'll ramp up your caseload at your own pace, part time or up to full time, and help cover
-                  a maternity leave along the way. We'd love for the right person to stay on long term with their own
+                  You'll build your caseload at your own pace, part time or up to full time, and help cover a maternity
+                  leave along the way. We'd love for the right person to stay on long term with their own
                   caseload, full time or part time.
                 </p>
               </div>
