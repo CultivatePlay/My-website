@@ -1,4 +1,4 @@
-// Cultivate Play — team + values. Exposes window.CPPeople, window.CPTeam, window.CPTestimonials, window.CPReviews.
+// Cultivate Play — team + values. Exposes window.CPPeople, window.CPHiringBanner, window.CPTeam, window.CPTestimonials, window.CPReviews.
 const NSt = window.CultivatePlayDesignSystem_d72bbd;
 
 // Team members, shared by the homepage Team section and the /team/ page.
@@ -20,6 +20,23 @@ const CPPeople = [
     bio: "Valerie is passionate about helping children grow through play. She believes the best therapy happens when children feel seen, heard, and excited to play. She uses a child-led, play-based approach to meet each child where they are, turning their interests into opportunities for growth. Her goal is to create a supportive, fun environment where kids can build skills, confidence, and independence, and be themselves.",
   },
 ];
+
+// "We're hiring!" strip shown at the top of the homepage and the /team/ page.
+function CPHiringBanner() {
+  const { Button } = NSt;
+  return (
+    <section aria-label="We're hiring" style={{ background: "var(--mint-100)", borderBottom: "1.5px solid var(--green-200)" }}>
+      <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-4) var(--space-6)", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "var(--space-3) var(--space-5)", textAlign: "center" }}>
+        <p style={{ margin: 0, fontSize: "var(--text-base)", color: "var(--ink-700)", lineHeight: 1.5 }}>
+          <strong style={{ fontFamily: "var(--font-display)", color: "var(--green-700)", fontSize: "var(--text-lg)" }}>We're hiring!</strong>{" "}
+          Looking for a neurodiversity-affirming pediatric OT to join our team.
+        </p>
+        <Button variant="primary" size="sm" as="a" href="/join-our-team/">Join the team</Button>
+      </div>
+    </section>
+  );
+}
+
 
 function CPTeam() {
   const { Button } = NSt;
@@ -153,4 +170,4 @@ function CPReviews() {
   );
 }
 
-Object.assign(window, { CPPeople, CPTeam, CPTestimonials, CPReviews });
+Object.assign(window, { CPPeople, CPHiringBanner, CPTeam, CPTestimonials, CPReviews });

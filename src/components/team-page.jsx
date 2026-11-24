@@ -3,21 +3,6 @@
   const { Hero, Band, render } = window.CPKit;
   const NS = window.CultivatePlayDesignSystem_d72bbd;
 
-  function HiringBanner() {
-    const { Button } = NS;
-    return (
-      <section aria-label="We're hiring" style={{ background: "var(--mint-100)", borderBottom: "1.5px solid var(--green-200)" }}>
-        <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "var(--space-4) var(--space-6)", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "var(--space-3) var(--space-5)", textAlign: "center" }}>
-          <p style={{ margin: 0, fontSize: "var(--text-base)", color: "var(--ink-700)", lineHeight: 1.5 }}>
-            <strong style={{ fontFamily: "var(--font-display)", color: "var(--green-700)", fontSize: "var(--text-lg)" }}>We're hiring!</strong>{" "}
-            Looking for a neurodiversity-affirming pediatric OT to join our team.
-          </p>
-          <Button variant="primary" size="sm" as="a" href="/join-our-team/">Join the team</Button>
-        </div>
-      </section>
-    );
-  }
-
   function Person({ person }) {
     return (
       <article className="cp-grid-2" style={{ display: "grid", gridTemplateColumns: "220px 1fr", gap: "var(--space-10)", alignItems: "start", background: "var(--white)", border: "1.5px solid var(--ink-200)", borderRadius: "var(--radius-xl)", padding: "var(--space-8)", boxShadow: "var(--shadow-xs)" }}>
@@ -37,7 +22,7 @@
   function Page() {
     return (
       <React.Fragment>
-        <HiringBanner />
+        <window.CPHiringBanner />
         <Hero crumb="Team" chip="Meet the team" title="Kind, credentialed, and on your side">
           A small, dedicated practice that treats your family like part of theirs. Get to know the
           therapists who will be playing, learning, and growing alongside your child.

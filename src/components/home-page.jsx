@@ -5,6 +5,7 @@ function Site(){
   return (<React.Fragment>
     <window.CPNav onBook={open}/>
     <main>
+      <window.CPHiringBanner/>
       <window.CPHero onBook={open}/>
       <window.CPServices/>
       <window.CPFloortime/>
